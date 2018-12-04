@@ -47,11 +47,12 @@ function initializeUserDataForm()
 function initializeUserDataTable()
 {
     let result = document.getElementById("result");
-    let table = result.getElementsByTagName("table")[0];
-    if(table === undefined)
+    let table = result.getElementsByTagName("table");
+    if(table.length === 0)
     {
         table = document.createElement("table");
         table.setAttribute("border", "1px");
+        table.setAttribute("cellpadding", "10px");
         result.appendChild(table);
         let thead = document.createElement("thead");
         table.appendChild(thead);
