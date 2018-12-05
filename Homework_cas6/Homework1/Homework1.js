@@ -1,5 +1,5 @@
 //#####################################################################################################################
-let userDataFields = ["First name", "Last name", "Username", "Password", "Address", "Email", "Date of birth"]
+let userDataFields = ["First name", "Last name", "Username", "Password", "Address", "Email", "Date of birth", "Telephone"]
 function initializeUserDataForm()
 {
     let userData = document.getElementById("UserData");
@@ -7,7 +7,7 @@ function initializeUserDataForm()
     {
         let label = document.createElement("label");
         label.setAttribute("for", `${userDataField}-ID`);
-        label.innerHTML = userDataField + "&nbsp;&nbsp;&nbsp;&nbsp;";
+        label.innerHTML = `${userDataField}&nbsp;&nbsp;&nbsp;&nbsp;`;
         
         let inputField = document.createElement("input");
         if(userDataField.includes("Password"))
@@ -78,6 +78,16 @@ function checkMissingFields(userInfo)
     if(missingFields.length > 0)
         return missingFields;
     return missingFields;
+}
+
+function clearUserDataFields()
+{
+    let userData = document.getElementById("UserData");
+    for(let userDataField of userDataFields)
+    {
+        let inputField = document.getElementById(`${userDataField}-ID`);
+        inputField.value = "";
+    }
 }
 
 
@@ -152,6 +162,9 @@ button.addEventListener("click", function()
     if(missingFields.length > 0)
         displayErrorMissingFields(missingFields);
     else
+    {
         printUserInfo(userInfo);
+        clearUserDataFields();
+    }
 });
 //#####################################################################################################################

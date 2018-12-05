@@ -8,4 +8,4 @@ window.addEventListener("resize", function(event)
 
    let screenSize = this.document.getElementById("ScreenSize");
    screenSize.textContent = `Screen size is = Width: ${event.target.screen.width}, Height: ${event.target.screen.height}`;
-}11)
+})
