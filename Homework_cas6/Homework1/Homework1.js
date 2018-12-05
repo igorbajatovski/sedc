@@ -62,7 +62,7 @@ function initializeUserDataTable()
         {
             let th = document.createElement("th");
             th.appendChild(document.createTextNode(userDataField));
-            thead.appendChild(th)
+            thead.appendChild(th);
         }
     }
 }
@@ -71,11 +71,26 @@ initializeUserDataForm();
 initializeUserDataTable()
 //#####################################################################################################################
 function printUserInfo(userInfo)
-{
+{   
+    let missingFields = userInfo.map((e,i) => { if(e === "") return userDataFields[i]; else return ""})
+    missingFields = missingFields.filter(e => e !== "");
+
+    if(missingFields.length > 0)
+        return missingFields;
+
+    let result = document.getElementById("result");
+    let table = result.getElementsByTagName("table")[0];
+    let tbody = table.getElementsByTagName("tbody")[0];
+    let newRow = document.createElement("tr");
     for (const userData of userInfo) 
     {
-
+        let cell = document.createElement("td");
+        cell.textContent = userData;
+        newRow.appendChild(cell);
     }
+    tbody.appendChild(newRow);
+
+    return [];
 }
 
 function getUserInfo()
@@ -89,11 +104,47 @@ function getUserInfo()
     return userInfo;
 }
 
+//#####################################################################################################################
+
+function displayErrorMissingFields(missingFields)
+{
+    missingFields = missingFields.map( (e) => e += "-ID" );
+    let userData = document.getElementById("UserData");
+    let inputFields = userData.getElementsByTagName("input");
+    for(let inputField of inputFields)
+    {
+        if(missingFields.includes(inputField.getAttribute("id")))
+        {
+            let error = document.createElement("span");
+            error.setAttribute("style", "color: red;")
+            error.appendChild(document.createTextNode("*"))
+            inputField.after(error);
+        }
+    }
+}
+
+function clearErrorMissingFields()
+{
+    let userData = document.getElementById("UserData");
+    let errors = userData.getElementsByTagName("span");
+    
+    if(errors.length > 0)
+    {
+        while(errors.length > 0)
+            errors[0].remove();
+    }
+}
+
+//#####################################################################################################################
+
 let button = document.getElementById("Register");
 
 button.addEventListener("click", function()
 {
+    clearErrorMissingFields();
     let userInfo = getUserInfo();
-    printUserInfo(userInfo);
+    let missingFields = printUserInfo(userInfo);
+    if(missingFields.length > 0)
+        displayErrorMissingFields(missingFields);
 });
 //#####################################################################################################################
