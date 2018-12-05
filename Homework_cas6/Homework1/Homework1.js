@@ -70,14 +70,19 @@ function initializeUserDataTable()
 initializeUserDataForm();
 initializeUserDataTable()
 //#####################################################################################################################
-function printUserInfo(userInfo)
-{   
+function checkMissingFields(userInfo)
+{
     let missingFields = userInfo.map((e,i) => { if(e === "") return userDataFields[i]; else return ""})
     missingFields = missingFields.filter(e => e !== "");
 
     if(missingFields.length > 0)
         return missingFields;
+    return missingFields;
+}
 
+
+function printUserInfo(userInfo)
+{   
     let result = document.getElementById("result");
     let table = result.getElementsByTagName("table")[0];
     let tbody = table.getElementsByTagName("tbody")[0];
@@ -143,8 +148,10 @@ button.addEventListener("click", function()
 {
     clearErrorMissingFields();
     let userInfo = getUserInfo();
-    let missingFields = printUserInfo(userInfo);
+    let missingFields = checkMissingFields(userInfo);
     if(missingFields.length > 0)
         displayErrorMissingFields(missingFields);
+    else
+        printUserInfo(userInfo);
 });
 //#####################################################################################################################
