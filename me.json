@@ -1,7 +1,0 @@
-{
-    "firstName": "Igor",
-    "lastName": "Bajatovski",
-    "age": 35,
-    "hobbies": ["Hiking", "Riding bike", "Running"],
-    "beestFriend": {"firstName": "Daniel", "lastName": "Kocev", "age": 35}
-}
