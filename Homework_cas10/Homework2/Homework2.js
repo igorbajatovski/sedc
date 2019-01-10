@@ -19,14 +19,11 @@
 
             $.ajax(
                 {
-                    url: "https://cors.io/?https://github.com/igorbajatovski/sedc/tree/master/Homework_cas10/Homework2/me.json",
-                    
-                    // dataType: "json",
+                    url: "https://igorbajatovski.github.io/sedc/Homework_cas10/Homework2/me.json",
 
                     success: function(response)
                     {
-                        let me = JSON.parse(response);
-                        printMe(me);
+                        printMe(response);
                     },
 
                     error: function(response)
