@@ -1,0 +1,48 @@
+#info{
+    position: absolute;
+}
+
+
+#countriesTable{
+    border: 1px solid black;
+    width: 800px;
+}
+
+
+#countriesTable th{
+    border: 1px solid black;
+}
+
+#countriesTable td{
+    border: 1px solid black;
+}
+
+#countriesTable tbody tr:hover {
+    background-color: lightskyblue;
+}
+
+.click{
+    cursor: pointer;
+}
+
+#deleteCountryInfo{
+    position: fixed;
+    top: 50px;
+    left: 1255px;
+}
+
+#country{
+    border: 1px solid black;
+    width: 400px;
+    position: fixed;
+    top: 50px;
+    left: 850px;
+}
+
+#country th{
+    border: 1px solid black;
+}
+
+#country td{
+    border: 1px solid black;
+}
