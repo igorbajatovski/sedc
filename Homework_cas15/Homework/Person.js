@@ -107,7 +107,6 @@ Person.prototype._getAgeInMonths = function()
     let currentDate = new Date();
 
     let counter = new Date(dob);
-    let month = counter.getMonth();
     let ageMonths = 0;
     // debugger;
     while( !( counter.getFullYear() === currentDate.getFullYear() &&
