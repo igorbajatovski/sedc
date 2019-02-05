@@ -78,4 +78,42 @@ function showPeopleTable(visible)
         firstRowHeader.addClass("display-none");
     }
 }
+
+function populateTable(data)
+{
+    let tableBody = $("#table tbody");
+
+    for (const item of data)
+    {   
+        let newRow = $(`<tr>`);
+
+        // if planet
+        if(isPlanet(item))
+        {
+            newRow.append(`<td>${item.name}</td>
+                            <td>${item.diameter}</td>
+                            <td>${item.climate}</td>
+                            <td>${item.terrain}</td>
+                            <td>${item.rotation_period}</td>
+                            <td>${item.population}</td>`);
+        }
+
+        // if people
+        if(isPeople(item))
+        {
+            newRow.append(`<td>${item.name}</td>
+                            <td>${item.gender}</td>
+                            <td>${item.birth_year}</td>
+                            <td>${item.height}</td>
+                            <td>${item.mass}</td>`);
+        }
+
+        tableBody.append(newRow);
+
+    }
+
+    $("#table tbody tr").on("click", showDetails);
+
+    return data;
+}
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
