@@ -828,13 +828,14 @@ $("#details > button").on("click", function(event)
 {
     let details = $("#details");
     details.find(":not(button)").remove();
-    details.hide();
+    $("#detailsModal").hide();
 });
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Show people/planets details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function showDetails(event)
-{
+{   
+    $(this).parent().children("tr").off("click");
     let display = $(`#details`).css("display");
     if(display === "none")
     {
@@ -845,11 +846,15 @@ function showDetails(event)
                             {
                                 if(isPeople(result.results[0]))
                                     showPeopleDetails(result.results[0]);
-                                // let width = Number($(window).width());
-                                // let height = Number($(window).height());
-                                // $("#details").css("top", parseInt(width/2) + "px");
-                                // $("#details").css("left", parseInt(height/2) + "px");
-                                $("#details").show();
+                                
+                                let width = $(window).innerWidth();
+                                let height = $(window).innerHeight();
+                                $("#details").css("top", parseInt(height/5) + "px");
+                                $("#details").css("left", parseInt(width/4) + "px");
+                                $("#detailsModal").css("width", $(document).width() + "px");
+                                $("#detailsModal").css("height", $(document).height() + "px");
+                                $("#detailsModal").show();
+                                $(this).parent().children("tr").on("click", showDetails);
                             });
         }
 }
@@ -927,6 +932,9 @@ function showMovieDetails(event)
     let movieDet = $(movie.toString());
     if(movieDet.length === 0)
     {
+        $(this).off("click");
+        $(this).on("click", (even) => {even.preventDefault()});
+
         fetch(event.target.href).
             then(result => result.json()).
                 then(result => 
@@ -940,6 +948,8 @@ function showMovieDetails(event)
                             <b>Director:</b> ${result.director}`);
                     row.append(movieDetails);
                     movieDetails.fadeIn(1000);
+                    $(this).off("click");
+                    $(this).on("click", showMovieDetails);
                 });
     }
     else
@@ -949,6 +959,9 @@ function showMovieDetails(event)
             movieDet.fadeOut(1000);
         else
             movieDet.fadeIn(1000);
+
+        // $(this).off("click");
+        // $(this).on("click", showMovieDetails);
     }
 }
 

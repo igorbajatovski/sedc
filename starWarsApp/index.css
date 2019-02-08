@@ -1,6 +1,8 @@
 body {
     background-image: url('./assets/starwars-background.jpg');
     background-attachment: fixed;
+    /* width: 100%;
+    height: 100%; */
 }
 
 #body, thead{
@@ -38,9 +40,19 @@ body {
 
 /* ****************** Details Window ***************************** */
 
-#details {
+#detailsModal {
     position: absolute;
+    top: 0;
+    left: 0;
     display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(50,50,50,0.5);
+}
+
+#details {
+    position: fixed;
+    display: inherit;
     top: 0;
     left: 0;
     width: 850px;
