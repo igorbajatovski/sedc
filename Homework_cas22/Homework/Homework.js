@@ -104,30 +104,24 @@ let miningship = new Miningship("TIE Advanced x1", "Darth Vader", 3000000, "Germ
                                 ["Mining Tool1", "Mining Tool1"], ["Mining Type1", "Mining Type2"], 8000000000);
 
 
-$("#Fighter tbody tr:nth-child(1) td:last").text(fighter.name);
-$("#Fighter tbody tr:nth-child(2) td:last").text(fighter.pilot);
-$("#Fighter tbody tr:nth-child(3) td:last").text(fighter.fuelTankCapacity);
-$("#Fighter tbody tr:nth-child(4) td:last").text(fighter.currentLocation);
-$("#Fighter tbody tr:nth-child(5) td:last").text(fighter.typeOfStarship);
-$("#Fighter tbody tr:nth-child(6) td:last").text(fighter.weapons);
-$("#Fighter tbody tr:nth-child(7) td:last").text(fighter.shield);
-$("#Fighter tbody tr:nth-child(8) td:last").text(fighter.numberOfKills);
+rows = $("#Fighter tbody tr");
+let i = 0;
+for (const prop in fighter) 
+{
+    rows[i].children[1].textContent = fighter[prop];
+    ++i;
+}
 
+i = 1;
+for (const prop in cargoship) 
+{
+    $(`#CargoShip tbody tr:nth-child(${i}) td:last`).text(cargoship[prop]);
+    ++i;
+}
 
-$("#CargoShip tbody tr:nth-child(1) td:last").text(cargoship.name);
-$("#CargoShip tbody tr:nth-child(2) td:last").text(cargoship.pilot);
-$("#CargoShip tbody tr:nth-child(3) td:last").text(cargoship.fuelTankCapacity);
-$("#CargoShip tbody tr:nth-child(4) td:last").text(cargoship.currentLocation);
-$("#CargoShip tbody tr:nth-child(5) td:last").text(cargoship.typeOfStarship);
-$("#CargoShip tbody tr:nth-child(6) td:last").text(cargoship.cargoCapacity);
-$("#CargoShip tbody tr:nth-child(7) td:last").text(cargoship.tradingRoute);
-$("#CargoShip tbody tr:nth-child(8) td:last").text(cargoship.loadingCranes);
-
-$("#MiningShip tbody tr:nth-child(1) td:last").text(miningship.name);
-$("#MiningShip tbody tr:nth-child(2) td:last").text(miningship.pilot);
-$("#MiningShip tbody tr:nth-child(3) td:last").text(miningship.fuelTankCapacity);
-$("#MiningShip tbody tr:nth-child(4) td:last").text(miningship.currentLocation);
-$("#MiningShip tbody tr:nth-child(5) td:last").text(miningship.typeOfStarship);
-$("#MiningShip tbody tr:nth-child(6) td:last").text(miningship.miningTools);
-$("#MiningShip tbody tr:nth-child(7) td:last").text(miningship.miningTypes);
-$("#MiningShip tbody tr:nth-child(8) td:last").text(miningship.miningStorageCapacity);
+i = 1;
+for (const prop in miningship) 
+{
+    $(`#MiningShip tbody tr:nth-child(${i}) td:last`).text(miningship[prop]);
+    ++i;
+}
