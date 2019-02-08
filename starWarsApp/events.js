@@ -81,7 +81,6 @@ $("#getPeople").on("click", function(event) {
 
         promise.then( (result) => {
                                         showProgess(false);
-                                        // result = addIDS(result);
                                         starWarsPeople = populateTable(result);
                                         showPeopleTable(true);
                                   }
@@ -113,9 +112,7 @@ $("#getPlanets").on("click", function(event) {
         let promise = fetchData("https://swapi.co/api/planets/");
         
         promise.then( (result) => {
-                                    finalResult = [];
                                     showProgess(false);
-                                    // result = addIDS(result);
                                     starWarsPlanets = populateTable(result);
                                     showPlanetsTable(true);
                                   }   
@@ -164,17 +161,10 @@ $("#search").on("click", async function(event) {
     }
     
     if(starWarsPeople === null)
-    {
         starWarsPeople = await getData("https://swapi.co/api/people/").then(result => result);
-        // starWarsPeople = addIDS(starWarsPeople);
-    }
 
     if(starWarsPlanets === null)
-    {
         starWarsPlanets = await fetchData("https://swapi.co/api/planets/").then(result => result);
-        // starWarsPlanets = addIDS(starWarsPlanets);
-        // starWarsPlanets = await getData("https://swapi.co/api/planets/").then(result => result);
-    }
 
     let foundPeople = parsePeople(starWarsPeople).filter((elem) => {
 
