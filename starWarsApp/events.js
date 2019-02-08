@@ -828,14 +828,22 @@ function showDetails(event)
     if(display === "none")
     {
         let name = $(this).find(":nth-child(1)").text();
-        let promise = fetch(`https://swapi.co/api/people/?search=${name}`).
+        let type = $(this).attr("type");
+        let promise = fetch(`https://swapi.co/api/${type}/?search=${name}`).
                         then(result => result.json()).
                             then(result => 
                             {
-                                if(isPeople(result.results[0]))
-                                    populatePeopleDetails(result.results[0]);
-                                
+                                if(result.results.length > 0)
+                                {
+                                    if(isPeople(result.results[0]))
+                                        populatePeopleDetails(result.results[0]);
+                                    
+                                    if(isPlanet(result.results[0]))
+                                        populatePlanetDetails(result.results[0]);
+
                                     showDetailsDialog(true);
+                                }
+                                
                                 $(this).parent().children("tr").on("click", showDetails);
                             });
         }
@@ -966,4 +974,44 @@ function showMovieDetails(event)
     }
 }
 
+function populatePlanetDetails(planet)
+{
+    let table = $(`<table>
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>`);
+
+    for(prop in planet)
+    {   
+        let row = $(`<tr>`);
+
+        if(prop === "name")
+        {
+            let cell = $(`<th colspan="2">`);
+            cell.text(planet.name);
+            row.append(cell);
+            table.find(`thead`).append(row);
+        }
+        else if(prop !== "films" && prop !== "created" && prop !== "edited" &&
+                prop !== "url" && prop !== "residents")
+        {
+            let cell = $(`<td>`);
+            cell.text(parseProperty(prop));
+            row.append(cell);
+
+            cell = $(`<td>`);
+            cell.text(parseProperty(planet[prop]));
+            row.append(cell);
+
+            table.find(`tbody`).append(row);
+        }
+    }
+
+    $("#details").append(table);
+    $("#details thead th").on("mousedown", detailsMouseDown);
+    $("#details thead th").on("mouseup", detailsMouseUp);
+    $("#details thead th").on("mousemove", detailsMouseMove);
+}
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

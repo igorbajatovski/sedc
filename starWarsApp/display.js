@@ -96,6 +96,7 @@ function populateTable(data)
                             <td>${item.terrain}</td>
                             <td>${item.rotation_period}</td>
                             <td>${item.population}</td>`);
+            newRow.attr("type", "planets");
         }
 
         // if people
@@ -106,12 +107,14 @@ function populateTable(data)
                             <td>${item.birth_year}</td>
                             <td>${item.height}</td>
                             <td>${item.mass}</td>`);
+            newRow.attr("type", "people");
         }
 
         tableBody.append(newRow);
 
     }
 
+    $("#table tbody tr").off("click");
     $("#table tbody tr").on("click", showDetails);
 
     return data;

@@ -16,6 +16,9 @@ function isPeople(item)
 
 function parseProperty(property)
 {
+    if(!isNaN(property))
+        return property;
+    
     if(property !== "n/a")
     {
         property = property.replace(new RegExp("_", "g"), " ");
