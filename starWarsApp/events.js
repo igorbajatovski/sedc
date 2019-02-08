@@ -826,9 +826,7 @@ function detailsMouseMove(event)
 
 $("#details > button").on("click", function(event)
 {
-    let details = $("#details");
-    details.find(":not(button)").remove();
-    $("#detailsModal").hide();
+    showDetailsDialog(false);
 });
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Show people/planets details +++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -845,21 +843,37 @@ function showDetails(event)
                             then(result => 
                             {
                                 if(isPeople(result.results[0]))
-                                    showPeopleDetails(result.results[0]);
+                                    populatePeopleDetails(result.results[0]);
                                 
-                                let width = $(window).innerWidth();
-                                let height = $(window).innerHeight();
-                                $("#details").css("top", parseInt(height/5) + "px");
-                                $("#details").css("left", parseInt(width/4) + "px");
-                                $("#detailsModal").css("width", $(document).width() + "px");
-                                $("#detailsModal").css("height", $(document).height() + "px");
-                                $("#detailsModal").show();
+                                    showDetailsDialog(true);
                                 $(this).parent().children("tr").on("click", showDetails);
                             });
         }
 }
 
-function showPeopleDetails(people)
+function showDetailsDialog(show)
+{   
+    if(show)
+    {
+        let width = $(window).innerWidth();
+        let height = $(window).innerHeight();
+        let details = $("#details");
+        details.css("top", parseInt(height/5) + "px");
+        details.css("left", parseInt(width/4) + "px");
+        let detailsModal = $("#detailsModal");
+        detailsModal.css("width", $(document).width() + "px");
+        detailsModal.css("height", $(document).height() + "px");
+        detailsModal.show();
+    }
+    else
+    {
+        let details = $("#details");
+        details.find(":not(button)").remove();
+        $("#detailsModal").hide();
+    }
+}
+
+function populatePeopleDetails(people)
 {
     let table = $(`<table>
                     <thead>
@@ -959,9 +973,6 @@ function showMovieDetails(event)
             movieDet.fadeOut(1000);
         else
             movieDet.fadeIn(1000);
-
-        // $(this).off("click");
-        // $(this).on("click", showMovieDetails);
     }
 }
 
