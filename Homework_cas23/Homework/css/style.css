@@ -1,0 +1,74 @@
+body{
+    background-image: url('../images/star-wars-commander.png');
+}
+
+/******************** Ship views ********************/
+.Fighter {
+    border: 1px solid black;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.CargoShip {
+    border: 1px solid black;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.MiningShip {
+    border: 1px solid black;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: lightgray;
+}
+
+.Fighter td, th {
+    border: 1px solid black;
+}
+
+.CargoShip td, th {
+    border: 1px solid black;
+}
+
+.MiningShip td, th {
+    border: 1px solid black;
+}
+
+#inputModule {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#inputModuleSet {
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+/*******************************************************/
+
+/********************* Input Module ********************/
+.displayShipFields {
+    display: none;
+}
+
+.displayFighterFields {
+    display: none;
+}
+
+.displayCargoFields {
+    display: none;
+}
+
+.displayMiningFields {
+    display: none;
+}
+
+.bckgrounColor {
+    background-color: lightgray;
+}
+/*******************************************************/

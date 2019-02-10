@@ -1,0 +1,119 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Homework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div id="inputModule">
+        <select name="ships" id="ships">
+            <option value="" selected="selected" disabled="disabled">Select type of ship</option>
+            <option value="fighterShip">Fighter ship</option>
+            <option value="cargoShip">Cargo ship</option>
+            <option value="miningShip">Mining ship</option>
+        </select>
+
+        <button id="createShipBtn">Create ship</button>
+
+        <fieldset id="inputModuleSet" class="displayShipFields">
+            <legend class="bckgrounColor">Enter ship details</legend>
+            <table id="shipInput" class="displayShipFields">
+                <tbody>
+
+                    <!-- Ship fields -->
+                    <tr class="displayShipFields bckgrounColor">
+                        <td> <label for="nameInput">Name</label> </td>
+                        <td> <input type="text" id="nameInput"> </td>
+                    </tr>
+                    <tr class="displayShipFields bckgrounColor">
+                        <td> <label for="pilotInput">Pilot name</label> </td>
+                        <td> <input type="text" id="pilotInput"> </td>
+                    </tr>
+                    <tr class="displayShipFields bckgrounColor">
+                        <td> <label for="fuelTankCapacityInput">Fuel Tank Capacity</label> </td>
+                        <td> <input type="number" id="fuelTankCapacityInput"> </td>
+                    </tr>
+                    <tr class="displayShipFields bckgrounColor">
+                        <td> <label for="currentLocationInput">Current location</label> </td>
+                        <td> <input type="text" id="currentLocationInput"> </td>
+                    </tr>
+                    <tr class="displayShipFields bckgrounColor">
+                        <td> <label for="typeOfStarshipInput">Type of starship</label> </td>
+                        <td> <input type="text" id="typeOfStarshipInput"> </td>
+                    </tr>
+
+                    <!-- Fighter fields -->
+                    <tr class="displayFighterFields bckgrounColor">
+                            <td> <label>Weapons</label> </td>
+                            <td style="border: 1px solid lightgray"> 
+                                <input type="checkbox" id="rockets" name="rockets" value="Rockets"> <label for="rockets">Rockets</label>
+                                <input type="checkbox" id="bombs" name="bombs" value="Bombs"> <label for="bombs">Bombs</label>
+                                <input type="checkbox" id="machineGuns" name="machineGuns" value="Machine guns"> <label for="machineGuns">Machine Guns</label> 
+                            </td>
+                        </tr>
+                        <tr class="displayFighterFields bckgrounColor">
+                            <td> <label for="shieldInput">Shild</label> </td>
+                            <td> <input type="text" id="shieldInput"> </td>
+                        </tr>
+                        <tr class="displayFighterFields bckgrounColor">
+                            <td> <label for="numberOfKillsInput">Number of kill</label> </td>
+                            <td> <input type="number" id="numberOfKillsInput"> </td>
+                        </tr>
+
+                    <!-- Cargo fields -->
+                    <tr class="displayCargoFields bckgrounColor">
+                        <td> <label for="cargoCapacityInput">Cargo Capacity</label> </td>
+                        <td> <input type="text" id="cargoCapacityInput"> </td>
+                    </tr>
+                    <tr class="displayCargoFields bckgrounColor">
+                        <td> <label for="tradingRouteInput">Trading route</label> </td>
+                        <td> <input type="text" id="tradingRouteInput"> </td>
+                    </tr>
+                    <tr class="displayCargoFields bckgrounColor">
+                        <td> <label for="loadingCranesInput">Loading cranes</label> </td>
+                        <td> <input type="number" id="loadingCranesInput"> </td>
+                    </tr>
+
+                    <!-- Mining fields -->
+                    <tr class="displayMiningFields bckgrounColor">
+                        <td> <label for="miningToolsInput">Mining tools</label> </td>
+                        <td style="border: 1px solid lightgray"> 
+                            <input type="checkbox" id="miningTool1" name="miningTool1" value="Mining tool 1"> <label for="miningTool1">Mining tool 1</label>
+                            <input type="checkbox" id="miningTool2" name="miningTool2" value="Mining tool 2"> <label for="miningTool2">Mining tool 2</label>
+                            <input type="checkbox" id="miningTool3" name="miningTool3" value="Mining tool 3"> <label for="miningTool3">Mining tool 3</label>
+                        <td>
+                    </tr>
+                    <tr class="displayMiningFields bckgrounColor">
+                        <td> <label for="miningTypesInput">Mining types</label> </td>
+                        <td style="border: 1px solid lightgray"> 
+                            <input type="checkbox" id="miningType1" name="miningType1" value="Mining type 1"> <label for="miningType1">Mining type 1</label>
+                            <input type="checkbox" id="miningType2" name="miningType2" value="Mining tool 2"> <label for="miningType2">Mining type 2</label>
+                            <input type="checkbox" id="miningType3" name="miningType3" value="Mining tool 3"> <label for="miningType3">Mining type 3</label>
+                        <td>
+                    </tr>
+                    <tr class="displayMiningFields bckgrounColor">
+                        <td> <label for="miningStorageCapacityInput">Mining storage capacity</label> </td>
+                        <td> <input type="number" id="miningStorageCapacityInput"> </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+
+    <div id="viewShips">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="GlobalVariables.js"></script>
+    <script src="Classes.js"></script>
+    <script src="Others.js"></script>
+    <script src="Display.js"></script>
+    <script src="Events.js"></script>
+</body>
+</html>
