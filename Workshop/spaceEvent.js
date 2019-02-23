@@ -15,7 +15,47 @@ class SpaceEvent {
         if( !(ship instanceof Ship) )
             throw Error("This is not a ship");
 
-        
+        let _event = new Promise( (resolve, reject) => {
+            setTimeout( () => {
+
+                if(ship.fuel + this.fuelModifier > ship.maxFuel)
+                    ship.fuel = ship.maxFuel;
+                else if(ship.fuel + this.fuelModifier <= 0)
+                {
+                    ship.fuel = 0;
+                    resolve(1);
+                    return;
+                }
+                else
+                    ship.fuel += this.fuelModifier;
+
+                if(ship.hullStrength + this.hullmodifier > ship.maxHullStrength)
+                    ship.hullStrength = ship.maxHullStrength;
+                else if(ship.hullStrength + this.hullmodifier <= 0)
+                {
+                    ship.hullStrength = 0;
+                    resolve(2);
+                    return;
+                }
+                else
+                    ship.hullStrength += this.fuelModifier;
+                
+                ship.hullStrength += this.hullmodifier;
+
+                if(ship.crew + this.crewModifier <= 0)
+                {
+                    ship.crew = 0;
+                    resolve(3);
+                    return;
+                }
+                else
+                    ship.crew += this.crewModifier;
+                
+                resolve(ship);
+            }, 4000 );
+        } );
+
+        return _event;
     }
 
     static generateEvents(time, events)
@@ -33,6 +73,8 @@ class SpaceEvent {
             numEvents = 2;
 
         for(let i = 0; i < numEvents; ++i) 
-            resultEvents.push(events[generateRandom(0, events.length - 1)]);
+            resultEvents.push(events[parseInt(generateRandom(0, events.length - 1))]);
+
+        return resultEvents;
     }
 }

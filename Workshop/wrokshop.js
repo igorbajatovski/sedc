@@ -36,4 +36,15 @@ let events = [
 
 let selectedShip = null;
 
-displayShips(ships);
+function copyArray(array)
+{
+    let newArray = [];
+    for (const item of array) {
+        let newObject = Object.assign({}, item);
+        Object.setPrototypeOf(newObject, Object.getPrototypeOf(item));
+        newArray.push(newObject);
+    }
+    return newArray;
+}
+
+displayShips(copyArray(ships));

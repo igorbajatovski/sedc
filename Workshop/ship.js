@@ -17,7 +17,8 @@ class Ship {
         this._isDestroyed = false;
         this._dockedPlanet = null;
 
-        this.dockEvents = [];
+        this.dockEventsHandlers = [];
+        this.spaceEventsHandlers = [];
     }
 
     _isDocked(planet)
@@ -48,7 +49,7 @@ class Ship {
     set dockedPlanet(value) { this._dockedPlanet = value; }
     get dockedPlanet() { return this._dockedPlanet; }
 
-    start(planet)
+    async start(planet)
     {
         if(this.isWorking)
             throw new Error("Ship is already travaling to a planet"); 
@@ -83,14 +84,32 @@ class Ship {
 
         this.isWorking = true;
 
-        setTimeout(() => {
+        // Time to travel
+        let arriveHandle = setTimeout(() => {
             console.log(`Ship ${this.name} has reached the planet ${planet.name}`);
             this.dock(planet);
         }, planet.distance * 1000/this.speed);
 
+        let space_events = SpaceEvent.generateEvents(planet.distance * 1000/this.speed, events);
         
-
-        return planet.distance * 1000/this.speed;
+        for (let space_event of space_events) 
+        {
+            let result = await space_event.startEvent(this);
+            if( !(result instanceof Ship) )
+            {
+                clearTimeout(arriveHandle);
+                if(result === 1)
+                    throw new Error("Game Over. Ship has no fuel.");
+                if(result === 2)
+                    throw new Error("Game Over. Ship has no hull strength.");
+                if(result === 3)
+                    throw new Error("Game Over. Ship has no crew.");
+            }
+            
+            for (const callback of this.spaceEventsHandlers) {
+                callback(space_event, this);
+            }
+        }
     }
 
     dock(planet)
@@ -101,9 +120,9 @@ class Ship {
             this.dockedPlanet = planet;
             console.log(`Ship ${this.name} has docked on planet ${planet.name}`);
 
-            if(this.dockEvents.length > 0)
+            if(this.dockEventsHandlers.length > 0)
             {
-                for (let callback of this.dockEvents) {
+                for (let callback of this.dockEventsHandlers) {
                     callback(this);
                 }
             }
@@ -121,7 +140,12 @@ class Ship {
 
     addDockEvent(dockEventHandler)
     {
-        this.dockEvents.push(dockEventHandler);
+        this.dockEventsHandlers.push(dockEventHandler);
+    }
+
+    addSpaceEvent(spaceEventHandler)
+    {
+        this.spaceEventsHandlers.push(spaceEventHandler);
     }
 
 }

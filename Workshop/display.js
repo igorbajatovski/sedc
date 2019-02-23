@@ -1,6 +1,8 @@
 function displayShips(ships)
 {
     let display = $("#display");
+    display.children().remove();
+
     for (let i = 0; i < ships.length; ++i) 
     {
         display.append(`
@@ -27,6 +29,11 @@ function displayShips(ships)
             { 
                 updateSelectedShip(ship); 
                 showDialog(`The ship ${ship.name} has arived at planet ${ship.dockedPlanet.name}`);
+            });
+            selectedShip.addSpaceEvent(function(spaceEvent, ship)
+            {
+                updateSelectedShip(ship);
+                showDialog(spaceEvent.description);
             });
             displaySelectedShip(selectedShip);
             displayPlanets(planets);
@@ -140,15 +147,16 @@ function displayPlanets(planets)
     {
         event.preventDefault();
         let planetID = parseInt($(this).parents(".planet").attr("id"));
-        try{
-            selectedShip.start(planets[planetID]);
-        }
-        catch(e)
-        {
-            console.log(e.message);
-            showDialog(e.message);
-        }
-    });
+        selectedShip.start(planets[planetID])
+                .catch( error => {
+
+                    if(error.message.indexOf("Game Over") > -1)
+                        displayShips(copyArray(ships));
+
+                    console.log(error.message);
+                    showDialog(error.message);
+                } );
+});
 }
 
 function showDialog(textString)
