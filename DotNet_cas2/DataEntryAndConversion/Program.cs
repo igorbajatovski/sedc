@@ -12,7 +12,7 @@ namespace DataEntryAndConversion
         {
             Console.Write("Enter some number:");
             //var result = int.Parse(Console.ReadLine());
-            //string input1 = Console.ReadLine();
+            string input1 = Console.ReadLine();
             //int parsedResult = int.Parse(input1);
             //int convertedResult = Convert.ToInt32(input1);
             int tryParsedResult;

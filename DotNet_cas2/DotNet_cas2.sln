@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp4", "ConsoleApp4\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEntryAndConversion", "DataEntryAndConversion\DataEntryAndConversion.csproj", "{76D0B0A9-6BFA-4364-BE85-A5691849D420}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Branching", "Branching\Branching.csproj", "{DC1F2E55-61BA-41FF-9AF6-9417883DD449}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp5", "ConsoleApp5\ConsoleApp5.csproj", "{A3158DFE-B8D6-4654-B816-87439ABD8001}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{76D0B0A9-6BFA-4364-BE85-A5691849D420}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D0B0A9-6BFA-4364-BE85-A5691849D420}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D0B0A9-6BFA-4364-BE85-A5691849D420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC1F2E55-61BA-41FF-9AF6-9417883DD449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC1F2E55-61BA-41FF-9AF6-9417883DD449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC1F2E55-61BA-41FF-9AF6-9417883DD449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC1F2E55-61BA-41FF-9AF6-9417883DD449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3158DFE-B8D6-4654-B816-87439ABD8001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3158DFE-B8D6-4654-B816-87439ABD8001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3158DFE-B8D6-4654-B816-87439ABD8001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3158DFE-B8D6-4654-B816-87439ABD8001}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
