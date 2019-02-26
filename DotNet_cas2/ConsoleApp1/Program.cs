@@ -20,8 +20,17 @@ namespace ConsoleApp1
             char characterVariable = '^';
             bool boolVariable = true;
             long longerInteger = 5465465435321321324;
-            Console.WriteLine(integerVariable1);
-            Console.WriteLine(integerVariable2);
+            int sumOfTwoNumber = 2 + 6;
+            sumOfTwoNumber += 12;
+            bool isGreater = 6 > 12;
+            Console.WriteLine(isGreater);
+            bool someExpression = true;
+            someExpression &= isGreater;
+            Console.WriteLine(isGreater);
+            var x = 5;
+            //Console.WriteLine(sumOfTwoNumber);
+            //Console.WriteLine(integerVariable1);
+            //Console.WriteLine(integerVariable2);
             Console.ReadLine();
         }
     }
