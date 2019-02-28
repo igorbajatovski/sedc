@@ -10,7 +10,7 @@ namespace Exercise6
     {
         static void Main(string[] args)
         {
-            string[] names = new string[1];
+            string[] names = new string[0];
             string line = "";
             do
             {
@@ -18,12 +18,8 @@ namespace Exercise6
                 line = Console.ReadLine();
                 if (line != "Y")
                 {
-                    names[names.Length - 1] = line;
                     Array.Resize(ref names, names.Length + 1);
-                }
-                else
-                {
-                    Array.Resize(ref names, names.Length - 1);
+                    names[names.Length - 1] = line;
                 }
             } while (line != "Y");
 
