@@ -16,7 +16,10 @@ namespace Exercise3
             for (int i = 1; i <= count; ++i)
             {
                 if (i == 100)
+                {
+                    Console.WriteLine("The limit is reached and stop counting");
                     break;
+                }
 
                 if (i % 3 == 0 || i % 7 == 0)
                     continue;
