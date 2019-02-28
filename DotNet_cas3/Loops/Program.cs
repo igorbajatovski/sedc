@@ -45,20 +45,25 @@ namespace Loops
             //    Console.WriteLine("Counter is " + counter);
             //    counter++;
             //}
-            Console.WriteLine("Press X to close the application!");
-            string textLine = "";
-            while((textLine = Console.ReadLine()) != "X")
-            {
-                Console.WriteLine("Executing importan code...");
-                Console.WriteLine(textLine);
-            }
+            //Console.WriteLine("Press X to close the application!");
+            //string textLine = "";
+            //while((textLine = Console.ReadLine()) != "X")
+            //{
+            //    Console.WriteLine("Executing importan code...");
+            //    Console.WriteLine(textLine);
+            //}
             #endregion
 
             #region Do While
-
+            int counter2 = 0;
+            do
+            {
+                Console.WriteLine(counter2);
+                counter2++;
+            } while (counter2 <= 5);
             #endregion
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }
