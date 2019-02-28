@@ -16,12 +16,12 @@ namespace Exercise6
             {
                 Console.Write("Enter name: ");
                 line = Console.ReadLine();
-                if (line != "Y")
+                if (line != "N")
                 {
                     Array.Resize(ref names, names.Length + 1);
                     names[names.Length - 1] = line;
                 }
-            } while (line != "Y");
+            } while (line != "N");
 
             for(int i = 0; i < names.Length; ++i)
             {
