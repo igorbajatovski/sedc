@@ -20,7 +20,7 @@ namespace Delegates
 
             DelegatePointsTo deleg2 = new DelegatePointsTo(Hello);
             deleg1("This is second delegate");
-
+            
             IntDelegate deleg3 = new IntDelegate(getInt);
             int i = deleg3(456);
             Console.WriteLine(i);
@@ -28,12 +28,21 @@ namespace Delegates
             AddDeleg add = new AddDeleg(Add1);
             add += Add2;
             add += Add3;
+            add += delegate (int q, int w)
+            {
+                Console.WriteLine("Presmetav kolku se q + w = {0}", q + w + 4);
+                return q + w + 4;
+            };
+            add += delegate { return 5; };
             Console.WriteLine(add(5, 10));
 
             add -= Add3;
             Console.WriteLine(add(5, 10));
 
             add -= Add2;
+            Console.WriteLine(add(5, 10));
+
+            add -= Add1;
             Console.WriteLine(add(5, 10));
 
             Console.ReadLine();
