@@ -31,6 +31,9 @@ namespace Lambda
             var numbers = Enumerable.Range(10, 90);
             Console.WriteLine(string.Join(" ", numbers));
 
+            long[] nums = { 1, 2, 3, 4, 5 };
+            var parni_long = nums.Where(e => e % 2 == 0);
+
             var parni = numbers.Where(e => e % 2 == 0);
             var neparni = numbers.Where(e => e % 2 != 0);
 
@@ -38,6 +41,15 @@ namespace Lambda
             Console.WriteLine(string.Join(" ", parni));
             line();
             Console.WriteLine(string.Join(" ", neparni));
+
+
+            var parni5 = numbers.Where(e => e % 2 == 0 && e % 5 == 0);
+            var neparni5 = numbers.Where(e => e % 2 != 0 && e % 5 == 0);
+
+            line();
+            Console.WriteLine(string.Join(" ", parni5));
+            line();
+            Console.WriteLine(string.Join(" ", neparni5));
 
             Console.ReadLine();
         }
