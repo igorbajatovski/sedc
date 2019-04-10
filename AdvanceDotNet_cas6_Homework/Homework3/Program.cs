@@ -8,39 +8,32 @@ namespace Homework3
 {
     class Program
     {
-        static void Main(string[] args)
+        public static int readNumberFromConsole(string msg)
         {
-            Console.Write("Input the number of members on the list : ");
-            int numOfElem;
-            while (!int.TryParse(Console.ReadLine(), out numOfElem))
+            int num;
+            Console.Write(msg);
+            while (!int.TryParse(Console.ReadLine(), out num))
             {
                 Console.WriteLine("Entered value is not a number!");
-                Console.Write("Input the number of members on the list : ");
+                Console.Write(msg);
             }
+            return num;
+        }
+
+        static void Main(string[] args)
+        {
+            int numOfElem = readNumberFromConsole("Input the number of members on the list : ");
 
             List<int> numbers = new List<int>();
             for(int i = 0; i < numOfElem; ++i)
             {
-                Console.Write($"Member {i}: ");
-                int member;
-                while (!int.TryParse(Console.ReadLine(), out member))
-                {
-                    Console.WriteLine("Entered value is not a number!");
-                    Console.Write($"Member {i}: ");
-                }
+                int member = readNumberFromConsole($"Member {i}: ");
                 numbers.Add(member);
             }
-
-            Console.Write("Input the value above you want to display the members of the list : ");
-            int above;
-            while (!int.TryParse(Console.ReadLine(), out above))
-            {
-                Console.WriteLine("Entered value is not a number!");
-                Console.Write("Input the value above you want to display the members of the list : ");
-            }
+            
+            int above = readNumberFromConsole("Input the value above you want to display the members of the list : ");
 
             var aboveNumbers = numbers.Where(e => e > above);
-
             Console.WriteLine("The numbers greater than {0} are : ", above);
             Console.WriteLine(string.Join("\n", aboveNumbers.ToArray()));
 
