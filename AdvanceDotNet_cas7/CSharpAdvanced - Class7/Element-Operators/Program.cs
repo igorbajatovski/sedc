@@ -34,6 +34,20 @@ namespace Element_Operators {
             var firtsWithT = strings.Where(s => s.StartsWith("t")).First();
             Console.WriteLine(string.Join(",", firtsWithT));
 
+            strings = new string[] { "zero" };
+            string str = strings.Single();
+            Console.WriteLine("Single: " + str);
+
+            strings = new string[] { "three", "two" };
+            str = strings.SingleOrDefault(x => x == "one");
+            Console.WriteLine("Single: " + (str == null ? "NULL" : str));
+
+            strings = new string[]{ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            Console.WriteLine("Last: " + strings.Last());
+
+            strings = new string[] { };
+            Console.WriteLine("Last: " + ( strings.LastOrDefault() == null ? "NULL" : strings.LastOrDefault() ) );
+
             //Linq 61: This sample uses FirstOrDefault to try to return the first element of the sequence, 
             //unless there are no elements, in which case the default value for that type is returned.
             //FirstOrDefault()
