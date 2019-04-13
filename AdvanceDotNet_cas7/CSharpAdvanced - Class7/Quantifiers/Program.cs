@@ -21,7 +21,7 @@ namespace Quantifiers {
 
             bool iAfterE = words.Any(w => w.Contains("ei"));
             Console.WriteLine("There is a word in the list that contains 'ei': {0}", iAfterE);
-
+            
             //Any grouped:
             //Linq 69: This sample uses Any to return a grouped a list of products only for 
             //categories that have at least one product that is out of stock.
@@ -39,7 +39,7 @@ namespace Quantifiers {
                 Console.WriteLine();
             }
 
-
+            
             //Linq 70: This sample uses All to determine whether an array contains only odd numbers.
             int[] numbers = { 1, 11, 3, 19, 41, 65, 19 };
             bool onlyOdd = numbers.All(n => n % 2 == 1);
@@ -61,7 +61,7 @@ namespace Quantifiers {
             }
 
             //Make an analyzis for the differences between Any() and All()
-
+           
         }
     }
 }

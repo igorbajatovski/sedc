@@ -73,7 +73,7 @@ namespace Restriction_Operators {
             var shortDigits = digits.Where((digit, index) => digit.Length < index);
             Console.WriteLine(string.Join(",", shortDigits));
 
-            shortDigits = from num in digits where num.Length < mum.Index select num;
+            //shortDigits = from num in digits where num.Length < num.Index select num;
 
             Console.ReadLine();
         }

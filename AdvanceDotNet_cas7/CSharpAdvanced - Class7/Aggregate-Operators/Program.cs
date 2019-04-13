@@ -22,14 +22,14 @@ namespace Aggregate_Operators {
             }
 
             var orderCounts = orders.GroupBy(o => o.CustomerID)
-                .Select(g => new { Customer = g.Key, Count = g.Count() });
-                //.Where(g => g.Customer =="VINET");
+                .Select(g => new { Customer = g.Key, Count = g.Count() })
+                .Where(g => g.Customer =="VINET");
 
             foreach (var item in orderCounts) {
                 Console.WriteLine("Customer {0}, Count {1}",item.Customer, item.Count);
             }
             Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            /*
+
             var orderCountsAndSum = orders.GroupBy(o => o.CustomerID)
                 .Select(g => new { Customer = g.Key, Count = g.Count(), Freight = g.Sum(p => p.Freight) })
                 .Where(g => g.Customer == "VINET");
@@ -38,7 +38,7 @@ namespace Aggregate_Operators {
                 Console.WriteLine("Customer: {0}, Count: {1}, Total freight: {2}",
                     item.Customer, item.Count, item.Freight);
             }
-
+            
             var minOrderFreigh = orders.GroupBy(o => o.CustomerID)
                 .Select(g => new { Customer = g.Key, MinFreight = g.Min(p => p.Freight) })
                 .Where(g => g.Customer == "VINET");
@@ -57,7 +57,7 @@ namespace Aggregate_Operators {
 
             var avgFreigthOfAll = orders.Average(o => o.Freight);
             Console.WriteLine("The average freight is {0:F2}", avgFreigthOfAll);
-            */
+            
         }
     }
 }

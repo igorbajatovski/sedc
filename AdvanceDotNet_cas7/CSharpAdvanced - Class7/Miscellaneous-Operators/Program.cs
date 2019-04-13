@@ -30,9 +30,10 @@ namespace Miscellaneous_Operators {
             var prodNames = products.Select(p => p.ProductName);
 
             var allNames = custNames.Concat(prodNames);
-            //foreach (var item in allNames) {
-            //    Console.WriteLine(item);
-            //}
+            foreach (var item in allNames)
+            {
+                Console.WriteLine(item);
+            }
 
             //Linq 96: EqualAll to see if two sequences match on all elements in the same order.
             var wordsA = new string[] { "cherry", "apple", "blueberry" };

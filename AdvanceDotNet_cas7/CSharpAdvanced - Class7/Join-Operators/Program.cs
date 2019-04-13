@@ -26,7 +26,7 @@ namespace Join_Operators {
             foreach (var item in q) {
                 Console.WriteLine("Customer {0}, City {1}, Freight {2}",item.Customer, item.City, item.Freight);
             }
-
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //lambda-like query:
             var q2 = customers.Join(orders,
                 c => c.CustomerID,
