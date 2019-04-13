@@ -36,17 +36,20 @@ namespace Projection_Operators {
 
             //{ 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             var productNames = products.Select(p => p.ProductName);
+            Console.WriteLine(string.Join("\n", productNames));
+
             string[] strings = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-            
             //Linq 8: This sample uses select to produce a sequence of strings representing the text 
             //version of a sequence of ints.
             var textNums = numbers.Select(n => strings[n]);
-            Console.WriteLine(string.Join(" ",textNums));
+            Console.WriteLine("textNums: " + string.Join(" ",textNums));
 
             //Select - Anonymous Types
             //Linq 9: This sample uses select to produce a sequence of the uppercase and lowercase 
             //versions of each word in the original array.
-            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" }; 
+            string[] words = { "aPPLE", "BlUeBeRrY", "cHeRry" };
+            var upperLowerList = words.Select(w => new { Upper = w.ToUpper(), Lower = w.ToLower() });
+            Console.WriteLine("upperLowerList: " + string.Join(" ", upperLowerList));
 
             //Select - Anonymous Types
             //Linq 10: This sample uses select to produce a sequence containing text representations 
@@ -58,13 +61,14 @@ namespace Projection_Operators {
 
             var productInfos = products.Select(p =>
                     new { p.ProductName, p.CategoryID, Price = p.UnitPrice });
-
+            Console.WriteLine("productInfos: " + string.Join("\n", productInfos));
             //Select - Indexed
             //Linq 12: This sample uses an indexed Select clause to determine if the value of ints in an array 
             //match their position in the array.
 
             var numsInPlace = numbers.Select((num, index) => new { Num = num, InPlace = (num == index) });
-            foreach (var n in numsInPlace) {
+            foreach (var n in numsInPlace)
+            {
                 Console.WriteLine("{0}: {1}", n.Num, n.InPlace);
             }
 
@@ -82,12 +86,13 @@ namespace Projection_Operators {
                          where a < b
                          select new { a, b });
             Console.WriteLine("Pairs where a < b:");
-            foreach (var pair in pairs) 
+            foreach (var pair in pairs)
                 Console.WriteLine("{0} is less than {1}", pair.a, pair.b);
 
             //Lambda-like approach
             var pairs2 = A.SelectMany(a => B, (a, b) => new { a, b })
                         .Where(pair => pair.a < pair.b).Select(pair => pair);
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++");
             foreach (var pair in pairs2)
                 Console.WriteLine("{0} is less than {1}", pair.a, pair.b);
 
@@ -98,11 +103,13 @@ namespace Projection_Operators {
                     from o in orders
                     where o.OrderDate > new DateTime(1998, 1, 1)
                     select new { c.CompanyName, o.OrderID, o.OrderDate };
-            foreach (var co in custOrders) {
-                Console.WriteLine("{0}, {1}, {2}",co.CompanyName, co.OrderID,co.OrderDate);
+            foreach (var co in custOrders)
+            {
+                Console.WriteLine("{0}, {1}, {2}", co.CompanyName, co.OrderID, co.OrderDate);
             }
-            Console.WriteLine(custOrders.Count()+" orders of all customers.");
+            Console.WriteLine(custOrders.Count() + " orders of all customers.");
 
+            Console.ReadLine();
             //Lambda-like approach
             var custOrders2 = customers.SelectMany(c => orders, (c, o)
                          => new { c.CompanyName, o.OrderID, o.OrderDate }).

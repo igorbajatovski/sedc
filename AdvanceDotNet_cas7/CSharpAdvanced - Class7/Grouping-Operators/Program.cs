@@ -15,7 +15,7 @@ namespace Grouping_Operators {
 
             //Linq 40: This sample uses group by to partition a list of numbers 
             //by their remainder when divided by 5.
-            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0, 11, 12, 13, 14, 15, 16 };
 
             //sql-like solution
             var numberGroups = from n in numbers
@@ -29,6 +29,7 @@ namespace Grouping_Operators {
                 Console.WriteLine();
             }
 
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //lambda-like solution
             var numberGroups2 = numbers
                                     .GroupBy(x => x % 5)
@@ -41,7 +42,7 @@ namespace Grouping_Operators {
                 Console.WriteLine();
             }
 
-
+            
             //Linq 41: This sample uses group by to partition a list of words by their first letter.
             string[] words = { "blueberry", "chimpanzee", "abacus", "banana", "apple", "cheese" };
             //lambda-like solution:
@@ -54,7 +55,7 @@ namespace Grouping_Operators {
                 }
                 Console.WriteLine();
             }
-
+            Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //sql-like solution:
             var wordGroups2 = from w in words
                               group w by w[0] into g
@@ -68,7 +69,7 @@ namespace Grouping_Operators {
                 }
                 Console.WriteLine();
             }
-
+            
         }
     }
 }
