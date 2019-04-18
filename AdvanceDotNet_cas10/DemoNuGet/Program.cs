@@ -62,7 +62,7 @@ namespace DemoNuGet_NewtonSoftJson
 
             Console.WriteLine(string.Join("\n", jCustomers));
 
-            string json = JsonConvert.SerializeObject(jCustomers);
+            string json = JsonConvert.SerializeObject(jCustomers, Formatting.Indented);
             Console.WriteLine("jCustomers: " + json);
         }
     }
