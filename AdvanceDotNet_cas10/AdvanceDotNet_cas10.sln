@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{4AF3F2B0-A07E-4154-A2A2-5522308C9A95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputOutput", "InputOutput\InputOutput.csproj", "{9011ACC3-2F33-41F0-9F73-DEB9CB03AD5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoNuGet_NewtonSoftJson", "DemoNuGet\DemoNuGet_NewtonSoftJson.csproj", "{172CCFA5-C6DB-4FB0-9391-3E4F813BDC95}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AF3F2B0-A07E-4154-A2A2-5522308C9A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF3F2B0-A07E-4154-A2A2-5522308C9A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF3F2B0-A07E-4154-A2A2-5522308C9A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF3F2B0-A07E-4154-A2A2-5522308C9A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9011ACC3-2F33-41F0-9F73-DEB9CB03AD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9011ACC3-2F33-41F0-9F73-DEB9CB03AD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9011ACC3-2F33-41F0-9F73-DEB9CB03AD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9011ACC3-2F33-41F0-9F73-DEB9CB03AD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{172CCFA5-C6DB-4FB0-9391-3E4F813BDC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172CCFA5-C6DB-4FB0-9391-3E4F813BDC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172CCFA5-C6DB-4FB0-9391-3E4F813BDC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172CCFA5-C6DB-4FB0-9391-3E4F813BDC95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
