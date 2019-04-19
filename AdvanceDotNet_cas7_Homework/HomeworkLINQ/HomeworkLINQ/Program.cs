@@ -157,14 +157,61 @@ namespace HomeworkLINQ
             Console.WriteLine();
 
             //12 - print the average song duration, of the album that has most songs
+            var albumsWithSongs = Albums.Join(Songs, al => al.Id, s => s.AlbumId, (al, s) => new { al, s })
+                                    .GroupBy(r => r.al.Name).Select(g => new { Album = g.Key, SongsCount = g.Count(), AverageSongDuration = g.Average(r=>r.s.Duration) });
 
+            int maxSongsOfAlbum = albumsWithSongs.Max(r => r.SongsCount);
+            var albumWitMaxSong = albumsWithSongs.Where(r => r.SongsCount == maxSongsOfAlbum)
+                                    .Select(r => new { AlbumWithMaxSongs = r.Album, AverageDurationOfSong = r.AverageSongDuration });
+
+            Console.WriteLine("album that has most songs with the average song duration: \n" + string.Join(",", albumWitMaxSong));
+            Console.WriteLine();
 
             // Bonus:
             //13 - print the longest song duration of the album that has least songs
+            var albumsWithSongs1 = from al in Albums
+                                   join song in Songs
+                                   on al.Id equals song.AlbumId
+                                   group al by al.Name into g
+                                   select new { Album = g.Key, Count = g.Count() };
+
+            var leastSongs = albumsWithSongs1.Min(g => g.Count);
+            var albumsWithLeastSongs = albumsWithSongs1.Where(g => g.Count == leastSongs);
+            Console.WriteLine("longest song duration of the album that has least songs :");
+            foreach (var group in albumsWithLeastSongs)
+            {
+                var a = Albums.Where(al => al.Name == group.Album)
+                           .Select(r => new { AlbumName = r.Name, Count = r.Songs.Count, ShortestSong = r.Songs.Min(s => s.Duration) });
+                Console.WriteLine(string.Join("\n", a));
+            }
+            Console.WriteLine();
+
             //14 - print the name of the album that has most songs that contain letter 'a' in the name
+            var albums3 = (from s in Songs group s by s.AlbumId).Select(g => new { AlbumID = g.Key, Count = g.Count(s => s.Name.Contains("a")) });
+            var albums4 = from al1 in albums3
+                          join al2 in Albums
+                          on al1.AlbumID equals al2.Id
+                          select new { al2.Name, al1.Count };
+
+            max = albums4.Max(r => r.Count);
+            var maxAlbum = albums4.Where(r => r.Count == max);
+            Console.WriteLine("The name of the album that has most songs that contain letter 'a' in the name: \n" + string.Join("\n", maxAlbum));
+            Console.WriteLine();
+
             //15 - print the name of the artist that has most songs that end with letter 'd'
+            var albums5 = (from s in Songs group s by s.AlbumId).Select(g => new { AlbumID = g.Key, Count = g.Count(s => s.Name.EndsWith("d")) });
+            var albums6 = from t1 in
+                          (from al3 in albums5
+                          join al4 in Albums
+                          on al3.AlbumID equals al4.Id
+                          select new { ArtistID = al4.ArtistId, AlbumName = al4.Name, Count = al3.Count})
+                          join t2 in Artists
+                          on t1.ArtistID equals t2.Id
+                          select new { t2.FullName,  t1.AlbumName, t1.Count };
 
-
+            max = albums6.Max(r => r.Count);
+            var maxAlbum1 = albums6.Where(r => r.Count == max);
+            Console.WriteLine("The name of the artist that has most songs that end with letter 'd': \n" + string.Join("\n", maxAlbum1));
 
         }
 
