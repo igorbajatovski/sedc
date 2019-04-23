@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeralizationDeseralization", "SeralizationDeseralization\SeralizationDeseralization.csproj", "{7A27F0B8-1272-4B9F-99BE-08531F61D15E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSonSerelization", "JSonSerelization\JSonSerelization.csproj", "{6CB5E4EE-56F5-4061-8ED7-6F1F76AD9D0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7A27F0B8-1272-4B9F-99BE-08531F61D15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A27F0B8-1272-4B9F-99BE-08531F61D15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A27F0B8-1272-4B9F-99BE-08531F61D15E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB5E4EE-56F5-4061-8ED7-6F1F76AD9D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB5E4EE-56F5-4061-8ED7-6F1F76AD9D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB5E4EE-56F5-4061-8ED7-6F1F76AD9D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB5E4EE-56F5-4061-8ED7-6F1F76AD9D0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

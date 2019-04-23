@@ -1,0 +1,24 @@
+[
+  {
+    "Employe ID": 1,
+    "FullName": "Igor Bajatovski",
+    "Gender": "M",
+    "WorkPhone": "071/231-789",
+    "Address": "Tome Arsovski 49 1/41",
+    "Skills": [
+      "C#",
+      "SQL Server"
+    ]
+  },
+  {
+    "Employe ID": 2,
+    "FullName": "Dejan Jovanov",
+    "Gender": "M",
+    "WorkPhone": "078/456-222",
+    "Address": "Partizanski Odredi 49 1/41",
+    "Skills": [
+      "C#",
+      "SQL Server"
+    ]
+  }
+]

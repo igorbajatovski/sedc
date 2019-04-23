@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Employee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ID>1</ID>
-  <Name>Igor Bajatovski</Name>
-  <Gender>77</Gender>
+  <FullName>Igor Bajatovski</FullName>
   <WorkPhone>071/231-789</WorkPhone>
-  <Skills>
-    <string>C#</string>
-    <string>SQL Server</string>
-  </Skills>
+  <Technologies>
+    <Language>C#</Language>
+    <Language>SQL Server</Language>
+  </Technologies>
 </Employee>
