@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks", "Tasks\Tasks.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwait", "AsyncAwait\AsyncAwait.csproj", "{509DBBCD-1325-4856-9562-DEC97975BEC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwiatExercise", "AsyncAwiatExercise\AsyncAwiatExercise.csproj", "{D7E573B6-D9CF-4159-B182-04222E3F6B40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{509DBBCD-1325-4856-9562-DEC97975BEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{509DBBCD-1325-4856-9562-DEC97975BEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{509DBBCD-1325-4856-9562-DEC97975BEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E573B6-D9CF-4159-B182-04222E3F6B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E573B6-D9CF-4159-B182-04222E3F6B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E573B6-D9CF-4159-B182-04222E3F6B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E573B6-D9CF-4159-B182-04222E3F6B40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
