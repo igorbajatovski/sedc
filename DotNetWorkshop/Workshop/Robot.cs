@@ -11,12 +11,14 @@ namespace Workshop
     {
         public void MaintaingDatawareHouse()
         {
-            Console.WriteLine($"{this.Name}, {this.Surname} is maintaning the the data warehouse");
+            //Console.WriteLine($"{this.Name}, {this.Surname} is maintaning the the data warehouse");
+            Logger.Log($"{this.Name}, {this.Surname} is maintaning the the data warehouse");
         }
 
         public void Work()
         {
-            Console.WriteLine($"{this.Name}, {this.Surname} is working on the data warehouse");
+            //Console.WriteLine($"{this.Name}, {this.Surname} is working on the data warehouse");
+            Logger.Log($"{this.Name}, {this.Surname} is working on the data warehouse");
         }
     }
 }

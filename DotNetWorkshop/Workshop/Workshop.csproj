@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\IEatable.cs" />
     <Compile Include="Interfaces\IManagable.cs" />
     <Compile Include="Interfaces\IWorkable.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ManagementStuff.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />

@@ -14,6 +14,8 @@ namespace Workshop
         public string Title { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime HireDate { get; set; }
+        public string Email { get; set; }
+        public int Salary { get; set; }
 
         public int WorkingExperiance()
         {
@@ -22,8 +24,8 @@ namespace Workshop
 
         public override string ToString()
         {   
-            return $"ID\tName\tSurname\tTitle\tBirth Date\tHire Date\n" +
-                   $"{ID}\t{Name}\t{Surname}\t{Title}\t{BirthDate.ToShortDateString()}\t{HireDate.ToShortDateString()}";
+            return $"ID\tName\tSurname\tTitle\tBirth Date\tHire Date\tEmail\tSalary\n" +
+                   $"{ID}\t{Name}\t{Surname}\t{Title}\t{BirthDate.ToShortDateString()}\t{HireDate.ToShortDateString()}\t{Email}\t{Salary}";
         }
     }
 }

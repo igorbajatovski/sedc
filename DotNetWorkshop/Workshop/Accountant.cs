@@ -11,17 +11,20 @@ namespace Workshop
     {
         public void Eat()
         {
-            Console.WriteLine($"Accountan {this.Name}, {this.Surname} is eating.");
+            //Console.WriteLine($"Accountan {this.Name}, {this.Surname} is eating.");
+            Logger.Log($"Accountan {this.Name}, {this.Surname} is eating.");
         }
 
         public void MaintainAccounts()
         {
-            Console.WriteLine($"{this.Name}, {this.Surname} is maintaning the accounts");
+            //Console.WriteLine($"{this.Name}, {this.Surname} is maintaning the accounts");
+            Logger.Log($"{this.Name}, {this.Surname} is maintaning the accounts");
         }
 
         public void Manage()
         {
-            Console.WriteLine($"{this.Name}, {this.Surname} is managing the company");
+            //Console.WriteLine($"{this.Name}, {this.Surname} is managing the company");
+            Logger.Log($"{this.Name}, {this.Surname} is managing the company");
         }
     }
 }
