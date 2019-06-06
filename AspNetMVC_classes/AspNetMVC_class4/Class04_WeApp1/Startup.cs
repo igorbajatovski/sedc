@@ -7,12 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PizzaDemo.Services;
-using PizzaDemo.Data;
 
-namespace PizzaDemo
+namespace Class04_WeApp1
 {
     public class Startup
     {
@@ -33,9 +32,6 @@ namespace PizzaDemo
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddTransient<IPizzaRepository, PizzaRepository>();
-            services.AddTransient<IPizzaService, PizzaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -61,8 +57,17 @@ namespace PizzaDemo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pizza}/{action=Menu}/{id?}");
+                    template: "{controller=Avangers}/{action=Index}/{id?}"
+                );
+
+                //routes.MapRoute(
+                //   name: "wizzard-route",
+                //   template: "getAllWizzards",
+                //   defaults: new { controler = "Wizzard", action = "getAllWizzards" } 
+                //);
+
             });
+
         }
     }
 }

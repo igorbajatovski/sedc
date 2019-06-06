@@ -11,24 +11,26 @@ namespace PizzaDemo.Models
 
         public string Description { get; set; }
 
-        private const int _defaultPrize = 150;
+        private readonly int _prize;
 
         public List<Ingridient> Ingridients = null;
 
-        public Pizza(string name, List<Ingridient> ingrediants)
+        public Pizza(string name, string description, List<Ingridient> ingrediants, int prize)
         {
             this.Name = name;
+            this.Description = description;
             this.Ingridients = ingrediants;
+            this._prize = prize;
         }
 
         public int getPrize(SizeEnum size)
         {
             if (size == SizeEnum.Small)
-                return _defaultPrize;
+                return _prize;
             else if (size == SizeEnum.Medium)
-                return (int) Math.Ceiling(_defaultPrize * 1.2);
+                return (int) Math.Ceiling(_prize * 1.2);
             else
-                return (int) Math.Ceiling(_defaultPrize * 1.4);
+                return (int) Math.Ceiling(_prize * 1.4);
         }
     }
 }
