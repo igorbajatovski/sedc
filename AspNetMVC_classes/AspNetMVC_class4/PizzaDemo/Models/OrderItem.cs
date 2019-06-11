@@ -7,13 +7,13 @@ namespace PizzaDemo.Models
 {
     public class OrderItem
     {
-        public PizzaViewModel Pizza { get; set; }
+        public Pizza Pizza { get; set; }
 
         public int Quantity { get; set; }
 
         public SizeEnum Size { get; set; }
 
-        public OrderItem(PizzaViewModel pizza, int quantity, SizeEnum size)
+        public OrderItem(Pizza pizza, int quantity, SizeEnum size)
         {
             this.Pizza = pizza;
             this.Quantity = quantity;

@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace PizzaDemo.Models
 {
-    public class PizzaViewModel
+    public class Pizza
     {
+        public int ID { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -15,8 +17,9 @@ namespace PizzaDemo.Models
 
         public List<Ingridient> Ingridients = null;
 
-        public PizzaViewModel(string name, string description, List<Ingridient> ingrediants, int prize)
+        public Pizza(int ID, string name, string description, List<Ingridient> ingrediants, int prize)
         {
+            this.ID = ID;
             this.Name = name;
             this.Description = description;
             this.Ingridients = ingrediants;

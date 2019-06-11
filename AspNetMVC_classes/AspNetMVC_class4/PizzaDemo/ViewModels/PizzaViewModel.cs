@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PizzaDemo.Data;
 
 namespace PizzaDemo.ViewModels
 {
@@ -25,11 +27,24 @@ namespace PizzaDemo.ViewModels
         public int BasePrise { get; set; }
 
         [Required]
-        public List<Ingridient> Ingridients { get; set; }
+        [DisplayName("Select all ingridients")]
+        public List<int> SelectedIngridients { get; set; }
+
+        public List<SelectListItem> AllIngridients { get; set; }
 
         public PizzaViewModel()
         {
+            SelectedIngridients = new List<int>();
+            AllIngridients = new List<SelectListItem>();
 
+            foreach (var ingidient in Storage.Ingidients)
+            {
+                AllIngridients.Add(
+                    new SelectListItem(
+                        ingidient.Name,
+                        ingidient.ID.ToString()
+                    ));
+            }
         }
     }
 }

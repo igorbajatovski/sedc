@@ -1,4 +1,5 @@
 ﻿using PizzaDemo.Models;
+using PizzaDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace PizzaDemo.Services
     public interface IPizzaService
     {
         Menu getMenu();
+        void CreatePizza(PizzaViewModel pizza);
     }
 }

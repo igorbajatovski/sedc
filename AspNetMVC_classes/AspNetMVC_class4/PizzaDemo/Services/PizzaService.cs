@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PizzaDemo.Models;
 using PizzaDemo.Data;
+using PizzaDemo.ViewModels;
 
 namespace PizzaDemo.Services
 {
@@ -14,6 +15,16 @@ namespace PizzaDemo.Services
         public PizzaService(IPizzaRepository pizzaRepository)
         {
             this._pizzaRepository = pizzaRepository;
+        }
+
+        public void CreatePizza(PizzaViewModel pizza)
+        {
+            var nextId = Storage.Pizzas.Last().ID + 1;
+            var ingridients = new List<Ingridient>();
+
+            //foreach()
+
+            //var pizzaModel = new Pizza(nextId, pizza.Name, pizza.Description, );
         }
 
         public Menu getMenu()

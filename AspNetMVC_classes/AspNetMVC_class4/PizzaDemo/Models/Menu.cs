@@ -9,11 +9,11 @@ namespace PizzaDemo.Models
     {
         public string RestorantName { get; set; }
 
-        public List<PizzaViewModel> Pizzas;
+        public List<Pizza> Pizzas;
 
         public List<SizeEnum> Sizes { get; set; }
 
-        public Menu(string restoranName, List<PizzaViewModel> pizzas)
+        public Menu(string restoranName, List<Pizza> pizzas)
         {
             this.RestorantName = restoranName;
             this.Pizzas = pizzas;

@@ -1,7 +1,4 @@
 ﻿@model PizzaDemo.ViewModels.PizzaViewModel
-@{
-    ViewData["Title"] = "Create";
-}
 
 <h2>Create new pizza</h2>
 <hr/>
@@ -21,6 +18,10 @@
                 <label asp-for="Description"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <select asp-for="SelectedIngridients" asp-items="Model.AllIngridients"></select>
             </div>
 
             <div class="form-group">

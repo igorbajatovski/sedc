@@ -7,12 +7,15 @@ namespace PizzaDemo.Models
 {
     public class Ingridient
     {
+        public int ID { get; set; }
+
         public string Name { get; set; }
 
         public List<string> Allergens { get; set; }
 
-        public Ingridient(string name, List<string> allergens)
+        public Ingridient(int ID, string name, List<string> allergens)
         {
+            this.ID = ID;
             this.Name = name;
             this.Allergens = allergens;
         }

@@ -8,28 +8,36 @@ namespace PizzaDemo.Data
 {
     internal static class Storage
     {
-        public static List<PizzaViewModel> Pizzas = new List<PizzaViewModel>()
+        public static List<Pizza> Pizzas = new List<Pizza>()
         {
-            new PizzaViewModel("Capri", "The best capri pizza in tiown!",
+            new Pizza(1, "Capri", "The best capri pizza in tiown!",
                 new List<Ingridient>()
                 {
-                    new Ingridient("ham", new List<string>()),
-                    new Ingridient("cheese", new List<string>() { "milk" }),
-                    new Ingridient("mashrooms", new List<string>())
+                    new Ingridient(1, "ham", new List<string>()),
+                    new Ingridient(2, "cheese", new List<string>() { "milk" }),
+                    new Ingridient(3, "mashrooms", new List<string>())
                 }, 160
             ),
 
-            new PizzaViewModel("Pepperoni", "The best pepperoni pizza in tiown!",
+            new Pizza(2, "Pepperoni", "The best pepperoni pizza in tiown!",
                 new List<Ingridient>()
                 {
-                    new Ingridient("pepperoni", new List<string>()),
-                    new Ingridient("cheese", new List<string>() { "milk" }),
-                    new Ingridient("mashrooms", new List<string>())
+                    new Ingridient(1, "pepperoni", new List<string>()),
+                    new Ingridient(2, "cheese", new List<string>() { "milk" }),
+                    new Ingridient(3, "mashrooms", new List<string>())
                 }, 160
            )
         };
 
         public static Menu RestoruantMenu = new Menu("Pizza House", Pizzas);
+
+        public static List<Ingridient> Ingidients = new List<Ingridient>()
+        {
+            new Ingridient(1, "ham", new List<string>()),
+            new Ingridient(2, "cheese", new List<string>() { "milk" }),
+            new Ingridient(3, "mashrooms", new List<string>()),
+            new Ingridient(4, "pepperoni", new List<string>())
+        };
 
     }
 }
