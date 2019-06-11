@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PizzaDemo.Models
 {
-    public class Pizza
+    public class PizzaViewModel
     {
         public string Name { get; set; }
 
@@ -15,7 +15,7 @@ namespace PizzaDemo.Models
 
         public List<Ingridient> Ingridients = null;
 
-        public Pizza(string name, string description, List<Ingridient> ingrediants, int prize)
+        public PizzaViewModel(string name, string description, List<Ingridient> ingrediants, int prize)
         {
             this.Name = name;
             this.Description = description;

@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PizzaDemo.Services;
 using PizzaDemo.Data;
+using PizzaDemo.ViewModels;
 
 namespace PizzaDemo.Controllers
 {
-    //[Route("pizzahouse")]
+    
     public class PizzaController : Controller
     {
         private readonly IPizzaService _pizzaService;
@@ -18,11 +19,29 @@ namespace PizzaDemo.Controllers
             this._pizzaService = pizzaService;
         }
 
-        //[Route("Menu")]
+        [HttpGet]
         public IActionResult Menu()
         {
             var menu = _pizzaService.getMenu();
             return View(menu);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(PizzaViewModel pizza)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(pizza);
+            }
+
+            // TODO: Insert valid pizza record in
+            return RedirectToAction("Menu", controllerName: "Pizza");
         }
     }
 }

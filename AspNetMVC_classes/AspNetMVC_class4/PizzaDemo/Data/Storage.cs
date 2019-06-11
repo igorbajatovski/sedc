@@ -8,9 +8,9 @@ namespace PizzaDemo.Data
 {
     internal static class Storage
     {
-        public static List<Pizza> Pizzas = new List<Pizza>()
+        public static List<PizzaViewModel> Pizzas = new List<PizzaViewModel>()
         {
-            new Pizza("Capri", "The best capri pizza in tiown!",
+            new PizzaViewModel("Capri", "The best capri pizza in tiown!",
                 new List<Ingridient>()
                 {
                     new Ingridient("ham", new List<string>()),
@@ -19,7 +19,7 @@ namespace PizzaDemo.Data
                 }, 160
             ),
 
-            new Pizza("Pepperoni", "The best pepperoni pizza in tiown!",
+            new PizzaViewModel("Pepperoni", "The best pepperoni pizza in tiown!",
                 new List<Ingridient>()
                 {
                     new Ingridient("pepperoni", new List<string>()),
