@@ -13,7 +13,7 @@ namespace PizzaDemo.ViewModels
     public class PizzaViewModel
     {
         [Required]
-        [MinLength(3)]
+        [MinLength(3, ErrorMessage ="PLease enter more then 3 characters")]
         [Display(Name = "Pizza Name")]
         public string Name { get; set; }
 
@@ -21,13 +21,13 @@ namespace PizzaDemo.ViewModels
         public string Description { get; set; }
 
         [Required]
-        //[MinLength(1)]
         [Display(Name = "Default prize")]
         [Range(typeof(int), "100", "500")]
         public int BasePrise { get; set; }
 
         [Required]
-        [DisplayName("Select all ingridients")]
+        [DisplayName("Select ingridients")]
+        [MinLength(1, ErrorMessage ="Select at least one ingridient")]
         public List<int> SelectedIngridients { get; set; }
 
         public List<SelectListItem> AllIngridients { get; set; }

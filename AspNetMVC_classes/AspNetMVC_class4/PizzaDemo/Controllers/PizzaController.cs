@@ -29,7 +29,8 @@ namespace PizzaDemo.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            PizzaViewModel pizzaViewModel = new PizzaViewModel();
+            return View(pizzaViewModel);
         }
 
         [HttpPost]
@@ -40,7 +41,8 @@ namespace PizzaDemo.Controllers
                 return View(pizza);
             }
 
-            // TODO: Insert valid pizza record in
+            this._pizzaService.CreatePizza(pizza);
+
             return RedirectToAction("Menu", controllerName: "Pizza");
         }
     }

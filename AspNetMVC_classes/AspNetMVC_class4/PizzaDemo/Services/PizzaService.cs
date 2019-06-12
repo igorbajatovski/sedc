@@ -22,9 +22,13 @@ namespace PizzaDemo.Services
             var nextId = Storage.Pizzas.Last().ID + 1;
             var ingridients = new List<Ingridient>();
 
-            //foreach()
+            foreach(var ingridient in pizza.SelectedIngridients)
+            {
+                ingridients.Add(Storage.Ingidients[ingridient-1]);
+            }
 
-            //var pizzaModel = new Pizza(nextId, pizza.Name, pizza.Description, );
+            var pizzaModel = new Pizza(nextId, pizza.Name, pizza.Description, ingridients, pizza.BasePrise);
+            _pizzaRepository.Save(pizzaModel);
         }
 
         public Menu getMenu()

@@ -12,5 +12,10 @@ namespace PizzaDemo.Data
         {
             return Storage.RestoruantMenu;
         }
+
+        public void Save(Pizza pizza)
+        {
+            Storage.Pizzas.Add(pizza);
+        }
     }
 }

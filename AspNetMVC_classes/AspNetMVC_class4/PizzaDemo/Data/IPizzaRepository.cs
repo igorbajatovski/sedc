@@ -9,5 +9,6 @@ namespace PizzaDemo.Data
     public interface IPizzaRepository
     {
         Menu getMenu();
+        void Save(Pizza pizza);
     }
 }

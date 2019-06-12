@@ -21,7 +21,9 @@
             </div>
 
             <div class="form-group">
-                <select asp-for="SelectedIngridients" asp-items="Model.AllIngridients"></select>
+                <label asp-for="SelectedIngridients" class="control-label"></label>
+                <select asp-for="SelectedIngridients" asp-items="Model.AllIngridients" class="form-control"></select>
+                <span asp-validation-for="SelectedIngridients" class="text-danger"></span>
             </div>
 
             <div class="form-group">
