@@ -5,49 +5,57 @@
 
 <div class="container">
     <a asp-action="Create" asp-controller="Pizza" class="btn btn-primary">Create Pizza</a>
-    <table class="table">
-        
-        <thead>
-            <tr>
-                <th>Pizza</th>
-                @{ 
-                    foreach(var size in Model.Sizes)
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Pizza</th>
+                    @{
+                        foreach (var size in Model.Sizes)
+                        {
+                            <th>@size.ToString()</th>
+                        }
+                    }
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    foreach (var pizza in Model.Pizzas)
                     {
-                        <th>@size.ToString()</th>
+                        <tr>
+                            <td>
+                                <h4>@pizza.Name</h4>
+                                <p>@pizza.Description</p>
+                            </td>
+
+                            <td>
+                                @pizza.getPrize(SizeEnum.Small).ToString("C", new CultureInfo("mk-MK"));
+                            </td>
+
+                            <td>
+                                @pizza.getPrize(SizeEnum.Medium).ToString("C", new CultureInfo("mk-MK"));
+                            </td>
+
+                            <td>
+                                @pizza.getPrize(SizeEnum.Large).ToString("C", new CultureInfo("mk-MK"));
+                            </td>
+
+                            <td>
+                                <a asp-route-id="@pizza.ID" asp-action="Details" asp-controller="Pizza" class="btn btn-primary">Details</a>
+                                <a asp-route-id="@pizza.ID" asp-action="Edit" asp-controller="Pizza" class="btn btn-primary">Edit</a>
+                                <a asp-route-id="@pizza.ID" asp-action="Delete" asp-controller="Pizza" class="btn btn-primary">Delete</a>
+                            </td>
+
+                        </tr>
                     }
                 }
-            </tr>
-        </thead>
 
-        <tbody>
+            </tbody>
 
-            @{ 
-                foreach(var pizza in Model.Pizzas)
-                {
-            <tr>
-                <td>
-                    <h4>@pizza.Name</h4>
-                    <p>@pizza.Description</p>
-                </td>
-
-                <td>
-                    @pizza.getPrize(SizeEnum.Small).ToString("C", new CultureInfo("mk-MK"));
-                </td>
-
-                <td>
-                    @pizza.getPrize(SizeEnum.Medium).ToString("C", new CultureInfo("mk-MK"));
-                </td>
-
-                <td>
-                    @pizza.getPrize(SizeEnum.Large).ToString("C", new CultureInfo("mk-MK"));
-                </td>
-
-            </tr>
-                }
-            }
-
-        </tbody>
-
-    </table>
+        </table>
 </div>
 

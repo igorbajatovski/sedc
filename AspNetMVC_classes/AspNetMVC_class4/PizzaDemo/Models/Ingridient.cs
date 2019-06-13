@@ -19,5 +19,16 @@ namespace PizzaDemo.Models
             this.Name = name;
             this.Allergens = allergens;
         }
+
+        public override bool Equals(object obj)
+        {
+            Ingridient ingre = obj as Ingridient;
+            if (ingre == null)
+                return false;
+            if (this.ID == ingre.ID)
+                return true;
+            else
+                return false;
+        }
     }
 }

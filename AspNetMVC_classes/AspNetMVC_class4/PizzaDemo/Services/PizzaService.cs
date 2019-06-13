@@ -35,5 +35,10 @@ namespace PizzaDemo.Services
         {
             return _pizzaRepository.getMenu();
         }
+
+        public Pizza GetPizza(int id)
+        {
+            return _pizzaRepository.GetPizza(id - 1);
+        }
     }
 }

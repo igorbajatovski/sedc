@@ -39,5 +39,12 @@ namespace PizzaDemo.Data
 
         public static Menu RestoruantMenu = new Menu("Pizza House", Pizzas);
 
+        public static List<User> Users = new List<User>()
+        {
+            new User(1, "071/354-789", "Igor Bajatovski", "Tome Arsovski 49"),
+            new User(2, "071/789-789", "Blagoj Ristovski", "Aerodrom 14"),
+            new User(3, "078/321-123", "Aleksandar Makedonski", "Plostad Makedonija")
+        };
+
     }
 }

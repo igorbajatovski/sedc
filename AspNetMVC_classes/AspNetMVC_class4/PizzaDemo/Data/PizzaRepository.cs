@@ -13,9 +13,16 @@ namespace PizzaDemo.Data
             return Storage.RestoruantMenu;
         }
 
+        public Pizza GetPizza(int id)
+        {
+            return Storage.Pizzas[id];
+        }
+
         public void Save(Pizza pizza)
         {
             Storage.Pizzas.Add(pizza);
         }
+
+
     }
 }

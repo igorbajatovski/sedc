@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PizzaDemo.Services;
 using PizzaDemo.Data;
 using PizzaDemo.ViewModels;
+using PizzaDemo.Models;
 
 namespace PizzaDemo.Controllers
 {
@@ -44,6 +45,12 @@ namespace PizzaDemo.Controllers
             this._pizzaService.CreatePizza(pizza);
 
             return RedirectToAction("Menu", controllerName: "Pizza");
+        }
+
+        [HttpGet]
+        public IActionResult Details(int pizzaID)
+        {
+            return View(_pizzaService.GetPizza(pizzaID - 1));
         }
     }
 }

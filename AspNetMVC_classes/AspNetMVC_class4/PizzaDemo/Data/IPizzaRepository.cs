@@ -10,5 +10,6 @@ namespace PizzaDemo.Data
     {
         Menu getMenu();
         void Save(Pizza pizza);
+        Pizza GetPizza(int id);
     }
 }
