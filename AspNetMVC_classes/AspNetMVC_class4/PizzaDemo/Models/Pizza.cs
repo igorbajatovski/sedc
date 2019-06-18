@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PizzaDemo.Models
 {
-    public class Pizza
+    public class Pizza : IEntity
     {
         public int ID { get; set; }
 

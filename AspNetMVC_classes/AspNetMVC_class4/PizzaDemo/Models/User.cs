@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PizzaDemo.Models
 {
-    public class User
+    public class User : IEntity
     {
         public int ID { get; set; }
 
@@ -23,15 +23,15 @@ namespace PizzaDemo.Models
             this.Address = address;
         }
 
-        public override bool Equals(object obj)
-        {
-            User user = obj as User;
-            if (user == null)
-                return false;
-            if (this.ID == user.ID)
-                return true;
-            else
-                return false;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    User user = obj as User;
+        //    if (user == null)
+        //        return false;
+        //    if (this.ID == user.ID)
+        //        return true;
+        //    else
+        //        return false;
+        //}
     }
 }

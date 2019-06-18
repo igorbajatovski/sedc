@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace PizzaDemo.Models
 {
-    public class Order
+    public class Order : IEntity
     {
+        public int ID { get; set; }
+
         public List<OrderItem> Items { set; get; }
 
         public User User { set; get; }
@@ -26,8 +28,9 @@ namespace PizzaDemo.Models
             }
         }
 
-        public Order(List<OrderItem> items, User user, DateTime orderDate)
+        public Order(int id, List<OrderItem> items, User user, DateTime orderDate)
         {
+            this.ID = id;
             this.Items = items;
             this.User = user;
             this.OrderDate = orderDate;

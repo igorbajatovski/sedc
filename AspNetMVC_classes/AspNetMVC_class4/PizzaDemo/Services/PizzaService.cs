@@ -10,9 +10,9 @@ namespace PizzaDemo.Services
 {
     public class PizzaService : IPizzaService
     {
-        private readonly IPizzaRepository _pizzaRepository;
+        private readonly IRepository<Pizza> _pizzaRepository;
 
-        public PizzaService(IPizzaRepository pizzaRepository)
+        public PizzaService(IRepository<Pizza> pizzaRepository)
         {
             this._pizzaRepository = pizzaRepository;
         }
@@ -28,17 +28,17 @@ namespace PizzaDemo.Services
             }
 
             var pizzaModel = new Pizza(nextId, pizza.Name, pizza.Description, ingridients, pizza.BasePrise);
-            _pizzaRepository.Save(pizzaModel);
+            _pizzaRepository.Create(pizzaModel);
         }
 
         public Menu getMenu()
         {
-            return _pizzaRepository.getMenu();
+            return Storage.RestoruantMenu;
         }
 
         public Pizza GetPizza(int id)
         {
-            return _pizzaRepository.GetPizza(id - 1);
+            return _pizzaRepository.GetById(id);
         }
     }
 }

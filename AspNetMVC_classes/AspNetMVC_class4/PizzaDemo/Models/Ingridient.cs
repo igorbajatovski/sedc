@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PizzaDemo.Models;
 
 namespace PizzaDemo.Models
 {
-    public class Ingridient
+    public class Ingridient : IEntity
     {
         public int ID { get; set; }
 
@@ -20,15 +21,15 @@ namespace PizzaDemo.Models
             this.Allergens = allergens;
         }
 
-        public override bool Equals(object obj)
-        {
-            Ingridient ingre = obj as Ingridient;
-            if (ingre == null)
-                return false;
-            if (this.ID == ingre.ID)
-                return true;
-            else
-                return false;
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    Ingridient ingre = obj as Ingridient;
+        //    if (ingre == null)
+        //        return false;
+        //    if (this.ID == ingre.ID)
+        //        return true;
+        //    else
+        //        return false;
+        //}
     }
 }

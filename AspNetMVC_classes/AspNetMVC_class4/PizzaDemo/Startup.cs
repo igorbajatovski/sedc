@@ -33,8 +33,12 @@ namespace PizzaDemo
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // First add the Repository
+            services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddTransient<IPizzaRepository, PizzaRepository>();
+            //Second add the Service
+            //services.AddTransient<IPizzaRepository, PizzaRepository>();
             services.AddTransient<IPizzaService, PizzaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

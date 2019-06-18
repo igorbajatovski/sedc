@@ -47,10 +47,14 @@ namespace PizzaDemo.Controllers
             return RedirectToAction("Menu", controllerName: "Pizza");
         }
 
-        [HttpGet]
-        public IActionResult Details(int pizzaID)
+        [HttpGet("{id}")]
+        public IActionResult Details(int id)
         {
-            return View(_pizzaService.GetPizza(pizzaID - 1));
+            Pizza pizza = _pizzaService.GetPizza(id);
+            if (pizza != null)
+                return View(pizza);
+            else
+                return LocalRedirect("/Pizza/Menu");
         }
     }
 }
