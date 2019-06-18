@@ -6,7 +6,7 @@ using PizzaDemo.Models;
 
 namespace PizzaDemo.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
         public void Create(User user)
         {

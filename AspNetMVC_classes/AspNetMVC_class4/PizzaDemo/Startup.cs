@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PizzaDemo.Services;
 using PizzaDemo.Data;
+using PizzaDemo.Models;
 
 namespace PizzaDemo
 {
@@ -34,11 +35,12 @@ namespace PizzaDemo
             });
 
             // First add the Repository
-            services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
             //services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
             //Second add the Service
             //services.AddTransient<IPizzaRepository, PizzaRepository>();
+            services.AddTransient(typeof(IRepository<Pizza>), typeof(PizzaRepository));
             services.AddTransient<IPizzaService, PizzaService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

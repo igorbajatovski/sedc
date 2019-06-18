@@ -10,7 +10,7 @@ using PizzaDemo.Models;
 
 namespace PizzaDemo.Controllers
 {
-    
+
     public class PizzaController : Controller
     {
         private readonly IPizzaService _pizzaService;
@@ -37,7 +37,7 @@ namespace PizzaDemo.Controllers
         [HttpPost]
         public IActionResult Create(PizzaViewModel pizza)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(pizza);
             }
@@ -47,7 +47,7 @@ namespace PizzaDemo.Controllers
             return RedirectToAction("Menu", controllerName: "Pizza");
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/[Controller]/[Action]/{id}")]
         public IActionResult Details(int id)
         {
             Pizza pizza = _pizzaService.GetPizza(id);
@@ -55,6 +55,37 @@ namespace PizzaDemo.Controllers
                 return View(pizza);
             else
                 return LocalRedirect("/Pizza/Menu");
+        }
+
+        [HttpGet("/[Controller]/[Action]/{id}")]
+        public IActionResult Edit(int id)
+        {
+            Pizza pizza = _pizzaService.GetPizza(id);
+
+            if (pizza != null)
+                return View(pizza.ToViewModel());
+            else
+                return LocalRedirect("/Pizza/Menu");
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PizzaViewModel pizzaViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(pizzaViewModel);
+
+            _pizzaService.EditPizza(pizzaViewModel);
+            return LocalRedirect("/Pizza/Menu");
+        }
+
+        [HttpGet("/[Controller]/[Action]/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var pizza = _pizzaService.GetPizza(id);
+            if (pizza != null)
+                _pizzaService.DeletePizza(pizza);
+
+            return LocalRedirect("/Pizza/Menu");
         }
     }
 }

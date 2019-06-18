@@ -12,5 +12,7 @@ namespace PizzaDemo.Services
         Menu getMenu();
         void CreatePizza(PizzaViewModel pizza);
         Pizza GetPizza(int id);
+        void EditPizza(PizzaViewModel pizza);
+        void DeletePizza(Pizza pizza);
     }
 }

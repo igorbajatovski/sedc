@@ -19,7 +19,10 @@ namespace PizzaDemo.Services
 
         public void CreatePizza(PizzaViewModel pizza)
         {
-            var nextId = Storage.Pizzas.Last().ID + 1;
+            Pizza lastPizza = Storage.Pizzas.Last();
+            int nextId = 1;
+            if (lastPizza != null)
+                nextId = Storage.Pizzas.Last().ID + 1;
             var ingridients = new List<Ingridient>();
 
             foreach(var ingridient in pizza.SelectedIngridients)
@@ -39,6 +42,16 @@ namespace PizzaDemo.Services
         public Pizza GetPizza(int id)
         {
             return _pizzaRepository.GetById(id);
+        }
+
+        public void EditPizza(PizzaViewModel pizza)
+        {
+            _pizzaRepository.Update(pizza.ToModel());
+        }
+
+        public void DeletePizza(Pizza pizza)
+        {
+            _pizzaRepository.Delete(pizza);
         }
     }
 }

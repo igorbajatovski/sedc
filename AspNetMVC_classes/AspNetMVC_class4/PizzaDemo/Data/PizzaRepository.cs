@@ -6,23 +6,38 @@ using PizzaDemo.Models;
 
 namespace PizzaDemo.Data
 {
-    public class PizzaRepository : IPizzaRepository
+    public class PizzaRepository : IRepository<Pizza>
     {
-        public Menu getMenu()
+        public void Create(Pizza entity)
         {
-            return Storage.RestoruantMenu;
+            Storage.Pizzas.Add(entity);
         }
 
-        public Pizza GetPizza(int id)
+        public void Delete(Pizza entity)
         {
-            return Storage.Pizzas[id];
+            Storage.Pizzas.Remove(entity);
         }
 
-        public void Save(Pizza pizza)
+        public List<Pizza> GetAll()
         {
-            Storage.Pizzas.Add(pizza);
+            return Storage.Pizzas;
         }
 
+        public Pizza GetById(int id)
+        {
+            return Storage.Pizzas.Where(e => e.ID == id).FirstOrDefault();
+        }
 
+        public void Update(Pizza entity)
+        {
+            var foundUser = Storage.Pizzas.Where(u => u.ID == entity.ID).ToArray();
+            if (foundUser.Length == 1)
+            {
+                foundUser[0].Name = entity.Name;
+                foundUser[0].Description = entity.Description;
+                foundUser[0].Ingridients = entity.Ingridients;
+                foundUser[0].Prize = entity.Prize;
+            }
+        }
     }
 }

@@ -1,3 +1,30 @@
 ﻿@model Pizza
-<h2>Details</h2>
+@{ 
+    var NA = "N/A";
+}
+<h2>Details about pizza @Model.Name</h2>
 
+<span>Description: @Model.Description</span>
+<br />
+<span>Prize: Small(@Model.getPrize(SizeEnum.Small) den), Medium(@Model.getPrize(SizeEnum.Medium) den), Large(@Model.getPrize(SizeEnum.Large) den)</span>
+<br />
+<span>Ingridients:</span>
+<ul>
+
+    @foreach (var ingre in Model.Ingridients)
+    {
+    <li>
+        @ingre.Name (
+        @if (string.Join(",", @ingre.Allergens.ToArray()) != string.Empty)
+        {
+            @string.Join(",", @ingre.Allergens.ToArray())
+        }
+        else
+        {
+            @NA
+        }
+        )
+    </li>
+    }
+
+</ul>

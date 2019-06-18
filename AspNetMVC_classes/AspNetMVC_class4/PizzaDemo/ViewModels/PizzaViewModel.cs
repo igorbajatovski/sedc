@@ -12,6 +12,8 @@ namespace PizzaDemo.ViewModels
 {
     public class PizzaViewModel
     {
+        public int ID { get; set; }
+
         [Required]
         [MinLength(3, ErrorMessage ="PLease enter more then 3 characters")]
         [Display(Name = "Pizza Name")]
@@ -46,5 +48,39 @@ namespace PizzaDemo.ViewModels
                     ));
             }
         }
+
+        public PizzaViewModel(string name, string description, int basePrise, List<int> selectedIngridients)
+        {
+            this.Name = name;
+            this.Description = description;
+            this.BasePrise = basePrise;
+            this.SelectedIngridients = selectedIngridients;
+
+            AllIngridients = new List<SelectListItem>();
+
+            foreach (var ingidient in Storage.Ingidients)
+            {
+                AllIngridients.Add(
+                    new SelectListItem(
+                        ingidient.Name,
+                        ingidient.ID.ToString()
+                    ));
+            }
+        }
+
+        //public Pizza ToModel()
+        //{
+        //    List<Ingridient> ingridient = new List<Ingridient>();
+        //    foreach (var ingre in this.SelectedIngridients)
+        //    {
+        //        var _ingre = Storage.Ingidients.Where(i => i.ID == ingre).FirstOrDefault();
+        //        if (_ingre != null)
+        //            ingridient.Add(_ingre);
+        //    }
+
+        //    Pizza _pizza = new Pizza(this.ID, this.Name, this.Description, ingridient, this.BasePrise);
+
+        //    return _pizza;
+        //}
     }
 }
