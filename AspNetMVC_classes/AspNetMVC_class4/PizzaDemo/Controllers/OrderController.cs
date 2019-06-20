@@ -45,11 +45,7 @@ namespace PizzaDemo.Controllers
             if (!ModelState.IsValid)
                 return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));
             
-            if (SessionData.Data.ContainsKey("OrderedItems"))
-                orderViewModel.OrderedItems = (List<OrderItem>)SessionData.Data["OrderedItems"];
-            
             orderViewModel = this._orderService.AddItemToOrder(orderViewModel);
-            SessionData.Data["OrderedItems"] = orderViewModel.OrderedItems;
 
             return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));
         }

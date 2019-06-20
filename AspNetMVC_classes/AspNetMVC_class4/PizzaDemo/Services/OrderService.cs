@@ -21,7 +21,10 @@ namespace PizzaDemo.Services
 
         public OrderViewModel AddItemToOrder(OrderViewModel orderViewModel)
         {
-            if(orderViewModel.OrderedItems.Count == 0)
+            if (SessionData.Data.ContainsKey("OrderedItems"))
+                orderViewModel.OrderedItems = (List<OrderItem>)SessionData.Data["OrderedItems"];
+
+            if (orderViewModel.OrderedItems.Count == 0)
             {
                 OrderItem orderItem = new OrderItem(1, this._pizzaRepository.GetById(orderViewModel.SelectedPizza),
                                                     orderViewModel.SelectedQuantity, orderViewModel.SelectedSize);
@@ -34,6 +37,9 @@ namespace PizzaDemo.Services
                                                     orderViewModel.SelectedQuantity, orderViewModel.SelectedSize);
                 orderViewModel.OrderedItems.Add(orderItem);
             }
+
+            SessionData.Data["OrderedItems"] = orderViewModel.OrderedItems;
+
             return orderViewModel;
         }
 
