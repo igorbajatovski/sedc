@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PizzaDemo.Services;
 using PizzaDemo.Data;
 using PizzaDemo.Models;
+using PizzaDemo.ViewModels;
 
 namespace PizzaDemo
 {
@@ -41,7 +42,11 @@ namespace PizzaDemo
             //Second add the Service
             //services.AddTransient<IPizzaRepository, PizzaRepository>();
             services.AddTransient(typeof(IRepository<Pizza>), typeof(PizzaRepository));
+            services.AddTransient(typeof(IRepository<Ingridient>), typeof(IngridientsRepository));
             services.AddTransient<IPizzaService, PizzaService>();
+
+            services.AddTransient(typeof(IRepository<Order>), typeof(OrderRepository));
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

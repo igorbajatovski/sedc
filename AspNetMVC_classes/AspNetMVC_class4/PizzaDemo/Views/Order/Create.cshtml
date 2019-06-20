@@ -1,0 +1,119 @@
+﻿@model PizzaDemo.ViewModels.OrderViewModel
+
+<!DOCTYPE html>
+
+<head>
+    <link href="~/css/Width.css" rel="stylesheet" />
+</head>
+
+<h2>Create order</h2>
+<hr />
+<div class="row">
+
+    <div class="col-md-10">
+
+        <form asp-controller="Order" asp-action="Create">
+
+            <fieldset>
+                <legend>User information</legend>
+
+                <div class="form-group">
+                    <label asp-for="@Model.User.FirstName"></label>
+                    <input asp-for="@Model.User.FirstName" placeholder="Enter first name" class="form-control width400"/>
+                    <span asp-validation-for="@Model.User.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.User.LastName"></label>
+                    <input asp-for="@Model.User.LastName" placeholder="Enter last name" class="form-control width400" />
+                    <span asp-validation-for="@Model.User.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.User.PhoneNumber"></label>
+                    <input asp-for="@Model.User.PhoneNumber" placeholder="Enter phone number" class="form-control width400" />
+                    <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.User.Address"></label>
+                    <input asp-for="@Model.User.Address" placeholder="Enter user address" class="form-control width400" />
+                    <span asp-validation-for="@Model.User.Address" class="text-danger"></span>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Ordered Items</legend>
+
+                    @if (Model.OrderedItems.Count == 0)
+                    {
+                        string text = "No orders available";
+                        @text;
+                    }
+                    else
+                    {
+                        <table style="width: 500px">
+
+                            <thead>
+                                <tr>
+                                    <th>Pizza</th>
+                                    <th>Size</th>
+                                    <th>Quantity</th>
+                                    <th>Prize</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.OrderedItems)
+                                {
+                                <tr>
+                                    <td>@item.Pizza.Name</td>
+                                    <td>@item.Size</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Pizza.getPrize(item.Size)</td>
+                                    @{
+                                        var Total = item.Quantity * item.Pizza.getPrize(item.Size);
+                                    }
+                                    <td>@Total</td>
+                                </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    }
+
+                <br />
+                <br />
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedPizza"></label>
+                                <select asp-for="@Model.SelectedPizza" asp-items="@Model.AllPizzas"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedSize"></label>
+                                <select asp-for="@Model.SelectedSize" asp-items="@Model.AllSizes"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedQuantity"></label>
+                                <select asp-for="@Model.SelectedQuantity" asp-items="@Model.AllQuantities"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <input asp-controller="Order" asp-action="AddItemToOrder" formmethod="post" type="submit" value="Add pizza" class="btn btn-primary" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <hr />
+            <input type="submit" value="Create" class="btn btn-primary" />
+
+        </form>
+
+    </div>
+ </div>

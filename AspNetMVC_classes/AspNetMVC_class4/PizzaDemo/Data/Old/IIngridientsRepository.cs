@@ -6,7 +6,7 @@ using PizzaDemo.Models;
 
 namespace PizzaDemo.Data
 {
-    interface IIngidientsRepository
+    interface IIngridientsRepository
     {
         void Create(Ingridient user);
         void Update(Ingridient user);

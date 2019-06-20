@@ -14,5 +14,7 @@ namespace PizzaDemo.Services
         Pizza GetPizza(int id);
         void EditPizza(PizzaViewModel pizza);
         void DeletePizza(Pizza pizza);
+        List<Pizza> GetAllPizzas();
+        int MaxPizzasToOrder();
     }
 }

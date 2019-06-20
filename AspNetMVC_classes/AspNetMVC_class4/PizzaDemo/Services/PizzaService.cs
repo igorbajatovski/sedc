@@ -11,10 +11,12 @@ namespace PizzaDemo.Services
     public class PizzaService : IPizzaService
     {
         private readonly IRepository<Pizza> _pizzaRepository;
+        private readonly IRepository<Ingridient> _ingridientRepository;
 
-        public PizzaService(IRepository<Pizza> pizzaRepository)
+        public PizzaService(IRepository<Pizza> pizzaRepository, IRepository<Ingridient> ingridientRepository)
         {
             this._pizzaRepository = pizzaRepository;
+            this._ingridientRepository = ingridientRepository;
         }
 
         public void CreatePizza(PizzaViewModel pizza)
@@ -27,7 +29,7 @@ namespace PizzaDemo.Services
 
             foreach(var ingridient in pizza.SelectedIngridients)
             {
-                ingridients.Add(Storage.Ingidients[ingridient-1]);
+                ingridients.Add(this._ingridientRepository.GetById(ingridient));
             }
 
             var pizzaModel = new Pizza(nextId, pizza.Name, pizza.Description, ingridients, pizza.BasePrise);
@@ -52,6 +54,16 @@ namespace PizzaDemo.Services
         public void DeletePizza(Pizza pizza)
         {
             _pizzaRepository.Delete(pizza);
+        }
+
+        public List<Pizza> GetAllPizzas()
+        {
+            return _pizzaRepository.GetAll();
+        }
+
+        public int MaxPizzasToOrder()
+        {
+            return 5;
         }
     }
 }

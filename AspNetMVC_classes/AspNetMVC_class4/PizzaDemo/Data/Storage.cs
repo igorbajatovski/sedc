@@ -8,6 +8,7 @@ namespace PizzaDemo.Data
 {
     internal static class Storage
     {
+        // List of ingridients
         public static List<Ingridient> Ingidients = new List<Ingridient>()
         {
             new Ingridient(1, "ham", new List<string>()),
@@ -16,6 +17,7 @@ namespace PizzaDemo.Data
             new Ingridient(4, "pepperoni", new List<string>())
         };
 
+        // List of pizzas
         public static List<Pizza> Pizzas = new List<Pizza>()
         {
             new Pizza(1, "Capri", "The best capri pizza in tiown!",
@@ -37,6 +39,7 @@ namespace PizzaDemo.Data
            )
         };
 
+        // Restorant Menu
         public static Menu RestoruantMenu = new Menu("Pizza House", Pizzas);
 
         public static List<User> Users = new List<User>()
@@ -46,5 +49,8 @@ namespace PizzaDemo.Data
             new User(3, "078/321-123", "Aleksandar Makedonski", "Plostad Makedonija")
         };
 
+        // List of pizza orders
+        public static List<Order> Orders = new List<Order>();
+        
     }
 }

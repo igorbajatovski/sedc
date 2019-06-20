@@ -9,7 +9,7 @@
         <form asp-action="Create" asp-controller="Pizza">
 
             <div class="form-group">
-                <label asp-for="Name"></label>
+                <label asp-for="@Model.Name"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label asp-for="SelectedIngridients" class="control-label"></label>
-                <select asp-for="SelectedIngridients" asp-items="Model.AllIngridients" class="form-control"></select>
+                <select asp-for="SelectedIngridients" asp-items="Model.AllIngridients" class="form-control" ></select>
                 <span asp-validation-for="SelectedIngridients" class="text-danger"></span>
             </div>
 
