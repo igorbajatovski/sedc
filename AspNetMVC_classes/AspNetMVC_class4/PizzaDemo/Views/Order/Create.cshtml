@@ -74,6 +74,9 @@
                                 <td style="text-align: right">
                                     @Model.OrderedItems[i].Pizza.Name
                                     <input asp-for="@Model.OrderedItems[i].Pizza.ID" type="hidden" />
+                                    <input asp-for="@Model.OrderedItems[i].Pizza.Name" type="hidden" />
+                                    <input asp-for="@Model.OrderedItems[i].Pizza.Description" type="hidden" />
+                                    <input asp-for="@Model.OrderedItems[i].Pizza.Prize" type="hidden" />
                                 </td>
                                 <td style="text-align: right">
                                     @Model.OrderedItems[i].Size
