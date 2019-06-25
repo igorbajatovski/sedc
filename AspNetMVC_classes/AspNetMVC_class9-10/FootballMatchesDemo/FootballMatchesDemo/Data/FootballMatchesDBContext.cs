@@ -21,7 +21,7 @@ namespace FootballMatchesDemo.Data
             modelBuilder.Entity<Team>().HasKey(t => t.ID);
             modelBuilder.Entity<Team>().HasMany<Player>(t => t.Players).WithOne(p => p.Team).HasForeignKey(p => p.TeamID);
 
-            modelBuilder.Entity<Team>().HasOne<Trainer>(x => x.Trainer).WithOne(x => x.Team).HasForeignKey(x => x.)
+            modelBuilder.Entity<Team>().HasOne<Trainer>(x => x.Trainer).WithOne(x => x.Team).HasForeignKey<Trainer>(x => x.TeamID);
         }
     }
 }
