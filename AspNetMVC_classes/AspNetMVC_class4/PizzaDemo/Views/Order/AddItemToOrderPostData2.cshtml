@@ -1,0 +1,24 @@
+﻿@model OrderItem
+
+<tr>
+    <td style="text-align: right">
+        @Model.Pizza.Name
+        <input asp-for="@Model.Pizza.ID" type="hidden" />
+    </td>
+    <td style="text-align: right">
+        @Model.Size
+        <input asp-for="@Model.Size" type="hidden" />
+    </td>
+    <td style="text-align: right">
+        @Model.Quantity
+        <input asp-for="@Model.Quantity" type="hidden" />
+    </td>
+    <td style="text-align: right">
+        @Model.Pizza.getPrize(Model.Size)
+    </td>
+    @{
+        var total = Model.Quantity * Model.Pizza.getPrize(Model.Size);
+    }
+    <td style="text-align: right">@total</td>
+</tr>
+

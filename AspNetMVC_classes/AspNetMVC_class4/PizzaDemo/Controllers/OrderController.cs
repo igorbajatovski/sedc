@@ -40,11 +40,24 @@ namespace PizzaDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddItemToOrder(OrderViewModel orderViewModel)
+        public IActionResult AddItemToOrderPostData(OrderViewModel orderViewModel, IFormCollection colllection)
         {
             if (!ModelState.IsValid)
                 return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));
+
+            var orderedItems = this._orderService.RecreateOrderItems(colllection);
+            orderViewModel.OrderedItems = orderedItems;
+            orderViewModel = this._orderService.AddItemToOrder(orderViewModel);
             
+            return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));
+        }
+
+        [HttpPost]
+        public IActionResult AddItemToOrderPostData2(OrderViewModel orderViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));
+
             orderViewModel = this._orderService.AddItemToOrder(orderViewModel);
 
             return View("Create", new OrderViewModel(this._pizzaService, orderViewModel));

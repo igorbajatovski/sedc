@@ -18,6 +18,8 @@ namespace PizzaDemo.Models
 
         public List<Ingridient> Ingridients { get; set; }
 
+        public Pizza() { }
+
         public Pizza(int ID, string name, string description, List<Ingridient> ingrediants, int prize)
         {
             this.ID = ID;

@@ -1,0 +1,83 @@
+﻿<!-- Ordered items with partial view -->
+            
+            <fieldset>
+                <legend>Ordered Items</legend>
+        
+                @if (Model.OrderedItems.Count == 0)
+                {
+                    string text = "No orders available";
+                    @text;
+                }
+                else
+                {
+                    <table style="width: 500px">
+
+                        <thead>
+                            <tr>
+                                <th>Pizza</th>
+                                <th>Size</th>
+                                <th>Quantity</th>
+                                <th>Prize</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.OrderedItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Pizza.Name
+                                        <input type="hidden" name="orderedPizza.ID" value="@item.Pizza.ID" />
+                                    </td>
+                                    <td>
+                                        @item.Size
+                                        <input type="hidden" name="orderedPizza.Size" value="@item.Size" />
+                                    </td>
+                                    <td>
+                                        @item.Quantity
+                                        <input type="hidden" name="orderedPizza.Quantity" value="@item.Quantity" />
+                                    </td>
+                                    <td>
+                                        @item.Pizza.getPrize(item.Size)
+                                    </td>
+                                    @{
+                                        var total = item.Quantity * item.Pizza.getPrize(item.Size);
+                                    }
+                                    <td>@total</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="5" style="text-align: right; font-weight:bold">Total bill: @Model.TotalPrize</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                }
+
+                <br />
+                <br />
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedPizza"></label>
+                                <select asp-for="@Model.SelectedPizza" asp-items="@Model.AllPizzas"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedSize"></label>
+                                <select asp-for="@Model.SelectedSize" asp-items="@Model.AllSizes"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <label asp-for="@Model.SelectedQuantity"></label>
+                                <select asp-for="@Model.SelectedQuantity" asp-items="@Model.AllQuantities"></select>
+                            </td>
+                            <td style="padding: 10px;">
+                                <input asp-controller="Order" asp-action="AddItemToOrderPostData" formmethod="post" type="submit" value="Add pizza" class="btn btn-primary" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </fieldset>

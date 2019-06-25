@@ -7,6 +7,7 @@ using PizzaDemo.Models;
 using PizzaDemo.Services;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
 //using PizzaDemo.Data;
 
 namespace PizzaDemo.ViewModels
@@ -17,6 +18,7 @@ namespace PizzaDemo.ViewModels
 
         public UserViewModel User { get; set; }
 
+        //[BindProperty(BinderType = typeof(List<OrderItem>))]
         public List<OrderItem> OrderedItems { get; set; }
 
         //++++++++++++++++++  Selected Pizza ++++++++++++++++++++++++
@@ -86,6 +88,19 @@ namespace PizzaDemo.ViewModels
             this.SelectedQuantity = 0;
             this.SelectedSize = 0;
             this.User = orderViewModel.User;
+        }
+
+        public int TotalPrize
+        {
+            get
+            {
+                int _totalPrize = 0;
+                Array.ForEach(OrderedItems.ToArray(), item =>
+                {
+                    _totalPrize += item.Pizza.getPrize(item.Size) * item.Quantity;
+                });
+                return _totalPrize;
+            }
         }
 
     }

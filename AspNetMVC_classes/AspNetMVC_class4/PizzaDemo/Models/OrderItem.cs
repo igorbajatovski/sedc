@@ -15,6 +15,8 @@ namespace PizzaDemo.Models
 
         public SizeEnum Size { get; set; }
 
+        public OrderItem() { }
+
         public OrderItem(int id, Pizza pizza, int quantity, SizeEnum size)
         {
             this.ID = id;
