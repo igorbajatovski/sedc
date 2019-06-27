@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FootballMatchesDemo.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace FootballMatchesDemo.Data
+{
+    public class TeamsRepository : IRepository<Team>
+    {
+        private readonly FootballMatchesDBContext _dbConnection = null;
+
+        public TeamsRepository(FootballMatchesDBContext dbConnection)
+        {
+            this._dbConnection = dbConnection;
+        }
+
+        public ICollection<Team> GetAll()
+        {
+            return this._dbConnection.Teams.ToList();
+        }
+
+        public void Save(Team entity)
+        {
+            this._dbConnection.Teams.Add(entity);
+            this._dbConnection.SaveChanges();
+        }
+    }
+}

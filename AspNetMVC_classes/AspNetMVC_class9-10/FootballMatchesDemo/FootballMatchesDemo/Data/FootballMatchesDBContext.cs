@@ -38,6 +38,7 @@ namespace FootballMatchesDemo.Data
                 .HasOne<Trainer>(x => x.Trainer)
                 .WithOne(x => x.Team)
                 .HasForeignKey<Trainer>(x => x.TeamID);
+
             //modelBuilder.Entity<Trainer>()
             //    .HasOne<Team>(t => t.Team)
             //    .WithOne(t => t.Trainer)
