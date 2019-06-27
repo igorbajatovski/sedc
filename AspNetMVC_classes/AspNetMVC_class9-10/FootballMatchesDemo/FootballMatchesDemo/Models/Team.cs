@@ -15,7 +15,9 @@ namespace FootballMatchesDemo.Models
 
         public Trainer Trainer { get; set; }
 
-        public ICollection<Match> Matches { get; set; }
+        public ICollection<Match> HomeMatches { get; set; }
+
+        public ICollection<Match> GuestMatches { get; set; }
 
         public Team() { }
     }
