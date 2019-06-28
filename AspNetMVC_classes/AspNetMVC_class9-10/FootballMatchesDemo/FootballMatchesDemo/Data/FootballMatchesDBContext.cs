@@ -16,6 +16,11 @@ namespace FootballMatchesDemo.Data
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Match> Matches { get; set; }
 
+        public FootballMatchesDBContext()
+        {
+
+        }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    if (!optionsBuilder.IsConfigured)

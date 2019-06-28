@@ -35,14 +35,17 @@ namespace FootballMatchesDemo
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddTransient(typeof(DbContext), typeof(FootballMatchesDBContext));
             services.AddTransient(typeof(IRepository<Team>), typeof(TeamsRepository));
+            services.AddTransient(typeof(IRepository<Player>), typeof(PlayerRepository));
+            services.AddTransient(typeof(IRepository<Trainer>), typeof(TrainerRepository));
             services.AddTransient(typeof(ITeamServices), typeof(TeamServices));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<FootballMatchesDBContext>(
-                x => x.UseSqlServer(@"Data Source=PETRA16;Initial Catalog=FootballMatches;User ID=sa;Password=Password1"));
-            //x => x.UseSqlServer(@"Data Source=IGOR01-LPT;Initial Catalog=FootBallMatches;Integrated Security=True"));
+            //    x => x.UseSqlServer(@"Data Source=PETRA16;Initial Catalog=FootballMatches;User ID=sa;Password=Password1"));
+            x => x.UseSqlServer(@"Data Source=IGOR01-LPT;Initial Catalog=FootBallMatches;Integrated Security=True"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

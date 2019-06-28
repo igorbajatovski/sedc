@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootballMatchesDemo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchesDemo.Data
 {
@@ -18,6 +19,11 @@ namespace FootballMatchesDemo.Data
         public ICollection<Trainer> GetAll()
         {
             return this._dbConnection.Trainers.ToList();
+        }
+
+        public DbContext GetDbConnection()
+        {
+            return this._dbConnection;
         }
 
         public void Save(Trainer entity)

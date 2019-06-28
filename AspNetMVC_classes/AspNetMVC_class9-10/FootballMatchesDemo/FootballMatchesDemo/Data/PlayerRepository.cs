@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FootballMatchesDemo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchesDemo.Data
 {
-    public class PlayerRepositorycs : IRepository<Player>
+    public class PlayerRepository : IRepository<Player>
     {
         private readonly FootballMatchesDBContext _dbConnection = null;
 
-        public PlayerRepositorycs(FootballMatchesDBContext dbConnection)
+        public PlayerRepository(FootballMatchesDBContext dbConnection)
         {
             this._dbConnection = dbConnection;
         }
@@ -18,6 +19,11 @@ namespace FootballMatchesDemo.Data
         public ICollection<Player> GetAll()
         {
             return this._dbConnection.Players.ToList();
+        }
+
+        public DbContext GetDbConnection()
+        {
+            return this._dbConnection;
         }
 
         public void Save(Player entity)

@@ -16,13 +16,14 @@ namespace FootballMatchesDemo.ViewModels
         [StringLength(50, ErrorMessage = "Team name can be maximum of 50 chars")]
         [DisplayName("Team Name")]
         public string Name { get; set; }
-
-        //[Required(ErrorMessage = "You must enter 22 players")]
+        
         public List<PlayerView> Players { get; set; }
 
         public TrainerView Trainer { get; set; }
 
         public PlayerView Player { get; set; }
+
+        public string ErrorMessage { get; set; }
 
         public TeamView()
         {

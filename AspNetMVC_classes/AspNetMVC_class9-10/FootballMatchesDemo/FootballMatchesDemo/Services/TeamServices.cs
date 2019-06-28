@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FootballMatchesDemo.Data;
 using FootballMatchesDemo.Models;
 using FootballMatchesDemo.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace FootballMatchesDemo.Services
 {
@@ -14,7 +15,9 @@ namespace FootballMatchesDemo.Services
         private readonly IRepository<Trainer> _trainerRepository = null;
         private readonly IRepository<Player> _playerRepository = null;
 
-        public TeamServices(IRepository<Team> teamRepository, IRepository<Trainer> trainerRepository, IRepository<Player> playerRepository)
+        public TeamServices(IRepository<Team> teamRepository,
+                            IRepository<Trainer> trainerRepository,
+                            IRepository<Player> playerRepository)
         {
             this._teamRepository = teamRepository;
             this._trainerRepository = trainerRepository;
@@ -43,25 +46,63 @@ namespace FootballMatchesDemo.Services
 
         public void CreateTeam(TeamView team)
         {
-            int lastTeamID = 0;
-            var lastTeam = this._teamRepository.GetAll().LastOrDefault();
-            if (lastTeam != null)
-                lastTeamID += 1;
+            //int lastTeamID = 1;
+            //var lastTeam = this._teamRepository.GetAll().LastOrDefault();
+            //if (lastTeam != null)
+            //    lastTeamID += lastTeam.ID + 1;
 
-            int lastTrainerID = 0;
-            var lastTrainer = this._trainerRepository.GetAll().LastOrDefault();
-            if (lastTrainer != null)
-                lastTrainerID += 1;
+            //int lastTrainerID = 1;
+            //var lastTrainer = this._trainerRepository.GetAll().LastOrDefault();
+            //if (lastTrainer != null)
+            //    lastTrainerID += lastTrainer.ID + 1;
 
-            int lastPlayerID = 0;
-            var lastPlayer = this._playerRepository.GetAll().LastOrDefault();
-            if (lastPlayer != null)
-                lastPlayerID += 1;
+            //int lastPlayerID = 1;
+            //var lastPlayer = this._playerRepository.GetAll().LastOrDefault();
+            //if (lastPlayer != null)
+            //    lastPlayerID += lastPlayer.ID + 1;
 
-            Team newTeam = new Team();
-            newTeam.ID = lastTeamID;
-            newTeam.Name = team.Name;
-            newTeam.Trainer = new Trainer() { };
+            Team newTeam = new Team
+            {
+                //newTeam.ID = lastTeamID;
+                Name = team.Name,
+
+                Trainer = new Trainer()
+                {
+                    //ID = lastTrainerID,
+                    FirstName = team.Trainer.FirstName,
+                    LastName = team.Trainer.LastName,
+                    //TeamID = lastTeamID
+                }
+            };
+
+            ICollection<Player> players = new List<Player>();
+            foreach (var player in team.Players)
+            {
+                players.Add(new Player()
+                {
+                    //ID = player.ID,
+                    FirstName = player.FirstName,
+                    LastName = player.LastName,
+                    //TeamID = lastTeamID
+                });
+            }
+            newTeam.Players = players;
+
+            try
+            {
+                this._teamRepository.GetDbConnection().Database.BeginTransaction();
+                this._teamRepository.Save(newTeam);
+                //this._trainerRepository.Save(newTeam.Trainer);
+                //foreach (var player in newTeam.Players)
+                //{
+                //    this._playerRepository.Save(player);
+                //}
+                this._teamRepository.GetDbConnection().Database.CommitTransaction();
+            }
+            catch(Exception ex)
+            {
+                this._teamRepository.GetDbConnection().Database.RollbackTransaction();
+            }
         }
     }
 }

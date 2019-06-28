@@ -21,6 +21,11 @@ namespace FootballMatchesDemo.Data
             return this._dbConnection.Teams.ToList();
         }
 
+        public DbContext GetDbConnection()
+        {
+            return this._dbConnection;
+        }
+
         public void Save(Team entity)
         {
             this._dbConnection.Teams.Add(entity);

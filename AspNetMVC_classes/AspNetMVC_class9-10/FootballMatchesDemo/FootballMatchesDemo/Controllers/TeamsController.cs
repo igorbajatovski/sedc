@@ -41,12 +41,12 @@ namespace FootballMatchesDemo.Controllers
 
             if(team.Players.Count < 22)
             {
+                team.ErrorMessage = "You need to enter at least 22 playes";
                 return View("AddTeam", team);
             }
-            
 
-
-            return ListTeams();
+            this._teamServices.CreateTeam(team);
+            return LocalRedirect("/Teams/ListTeams");
         }
 
         [HttpPost]
