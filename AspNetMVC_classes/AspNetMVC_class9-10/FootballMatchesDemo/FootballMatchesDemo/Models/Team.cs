@@ -11,7 +11,7 @@ namespace FootballMatchesDemo.Models
     public class Team
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [StringLength(50)]

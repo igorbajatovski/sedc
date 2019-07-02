@@ -18,6 +18,9 @@ namespace FootballMatchesDemo.Data
 
         public ICollection<Team> GetAll()
         {
+            this._dbConnection.Teams.Load();
+            this._dbConnection.Trainers.Load();
+            this._dbConnection.Players.Load();
             return this._dbConnection.Teams.ToList();
         }
 

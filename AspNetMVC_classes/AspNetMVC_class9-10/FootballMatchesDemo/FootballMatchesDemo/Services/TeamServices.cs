@@ -44,6 +44,14 @@ namespace FootballMatchesDemo.Services
             return team;
         }
 
+        public TeamView RemovePlayer(TeamView team, int playerID)
+        {
+            var playerToDelte = team.Players.Where(p => p.ID == playerID).FirstOrDefault();
+            if (playerToDelte != null)
+                team.Players.Remove(playerToDelte);
+            return team;
+        }
+
         public void CreateTeam(TeamView team)
         {
             //int lastTeamID = 1;
@@ -90,18 +98,13 @@ namespace FootballMatchesDemo.Services
 
             try
             {
-                this._teamRepository.GetDbConnection().Database.BeginTransaction();
+                //this._teamRepository.GetDbConnection().Database.BeginTransaction();
                 this._teamRepository.Save(newTeam);
-                //this._trainerRepository.Save(newTeam.Trainer);
-                //foreach (var player in newTeam.Players)
-                //{
-                //    this._playerRepository.Save(player);
-                //}
-                this._teamRepository.GetDbConnection().Database.CommitTransaction();
+                //this._teamRepository.GetDbConnection().Database.CommitTransaction();
             }
             catch(Exception ex)
             {
-                this._teamRepository.GetDbConnection().Database.RollbackTransaction();
+                //this._teamRepository.GetDbConnection().Database.RollbackTransaction();
             }
         }
     }

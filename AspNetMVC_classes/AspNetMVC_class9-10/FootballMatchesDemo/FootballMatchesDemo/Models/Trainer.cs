@@ -10,7 +10,7 @@ namespace FootballMatchesDemo.Models
     public class Trainer
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [StringLength(50)]

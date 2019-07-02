@@ -4,16 +4,49 @@
 <a asp-controller="Teams" asp-action="AddTeam" class="btn btn-default">Create Team</a>
 
 <br />
+<br />
+<br />
+<br />
 
 @{ 
     string noTeams = "No teams available";
     if (Model.Count() > 0)
     {
-        foreach (var team in Model)
-        {
-            @team.ID;
-            @team.Name;
-        }
+
+        <table style="width: 500px">
+
+            <thead>
+                <tr>
+                    <th style="text-align: right">ID</th>
+                    <th style="text-align: right">Team name</th>
+                    <th style="text-align: right">Team trainer</th>
+                    <th style="text-align: right">Action</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            @foreach (var team in Model)
+            {
+                <tr>
+                    <td style="text-align: right">
+                        @team.ID
+                    </td>
+                    <td style="text-align: right">
+                        @team.Name
+                    </td>
+                    <td style="text-align: right">
+                        @string.Join(" ", team.Trainer.FirstName, team.Trainer.LastName)
+                    </td>
+                    <td style="text-align: right">
+                        <a asp-controller="Teams" asp-action="Details" asp-route-id="@team.ID" class="btn btn-primary">Details</a>
+                        <a asp-controller="Teams" asp-action="Edit" asp-route-id="@team.ID" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Teams" asp-action="Delete" asp-route-id="@team.ID" class="btn btn-primary">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+
+        </table>
     }
     else
     {

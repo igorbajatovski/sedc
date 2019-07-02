@@ -64,5 +64,15 @@ namespace FootballMatchesDemo.Controllers
 
             return View("AddTeam", team);
         }
+
+        [HttpPost]
+        public IActionResult DeletePlayer(TeamView team, int playerToDeleteID)
+        {
+            var _team = this._teamServices.RemovePlayer(team, playerToDeleteID);
+            _team.Player.FirstName = "";
+            _team.Player.LastName = "";
+
+            return View("AddTeam", _team);
+        }
     }
 }

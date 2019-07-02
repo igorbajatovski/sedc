@@ -11,6 +11,7 @@ namespace FootballMatchesDemo.Services
     {
         ICollection<Team> GetAllTeams();
         TeamView AddPlayer(TeamView team);
+        TeamView RemovePlayer(TeamView team, int playerID);
         void CreateTeam(TeamView team);
     }
 }
