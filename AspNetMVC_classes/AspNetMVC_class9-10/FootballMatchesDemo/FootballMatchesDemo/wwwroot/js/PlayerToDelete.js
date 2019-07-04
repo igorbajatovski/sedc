@@ -1,12 +1,17 @@
-﻿document.onload = function() {
-
-    let playerToDelete = $("PlayerActions").find("button").on("click", (event) => {
-        event.preventDefault();
-        let playerToDelete = $(this).append('<input type="hidden">');
-        let value = $(this).parent().parent().find(":first").text();
-        playerToDelete.attr("name", "playerToDeleteID");
-        playerToDelete.attr("value", value);
-        console.log(`value=${value}`);
-        //$(this).trigger("submit");
-    });
-};
+﻿let deleteBtns = $("table tr button");
+if (deleteBtns.length > 0) {
+    deleteBtns
+        .on("click", function (event, data) {
+            if (data === undefined) {
+                event.preventDefault();
+                //let table = $("table").after('<input type="hidden" />');
+                $(this).after('<input type="hidden" />');
+                //let playerToDelete = table.next();
+                let playerToDelete = $(this).next();
+                let value = $(this).parent().parent().find(":first").text().trim();
+                playerToDelete.attr("name", "playerToDeleteID");
+                playerToDelete.attr("value", value);
+                $(this).trigger("click", {});
+            }
+        });
+}

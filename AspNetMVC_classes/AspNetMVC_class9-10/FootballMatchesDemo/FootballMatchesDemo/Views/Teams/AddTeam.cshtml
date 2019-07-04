@@ -1,7 +1,7 @@
 ﻿@model FootballMatchesDemo.ViewModels.TeamView
 <h2>Add Team</h2>
 
-<form asp-controller="Teams" asp-action="AddTeam">
+<form id="AddTeamForm" asp-controller="Teams" asp-action="AddTeam">
 
     <div>
 
@@ -70,12 +70,12 @@
                                         @Model.Players[i].LastName
                                         <input asp-for="@Model.Players[i].LastName" type="hidden" />
                                     </td>
-                                    <td id="PlayerActions" style="text-align: right">
+                                    <td style="text-align: right">
                                         <a asp-controller="Teams" 
                                            asp-action="EditPlayer" 
                                            asp-route-id="@Model.Players[i].ID" 
                                            class="btn btn-primary">Edit</a>
-                                        <button type="submit" 
+                                        <button id="DeleteBtn" type="submit" 
                                                 asp-controller="Teams" 
                                                 asp-action="DeletePlayer" 
                                                 class="btn btn-primary">Delete</button>
@@ -108,5 +108,3 @@
     </div>
 
 </form>
-
-<script src="~/js/PlayerToDelete.js"></script>
