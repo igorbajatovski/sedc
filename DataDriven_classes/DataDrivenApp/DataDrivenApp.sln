@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyApp-Dappper", "CompanyApp-Dappper\CompanyApp-Dappper.csproj", "{31CCA0D8-42EC-448E-959B-9EDBF4AAB5C4}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CompanyDatabase", "CompanyDatabase\CompanyDatabase.sqlproj", "{DA1A3216-EE64-4851-B956-5EEF1D53C789}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31CCA0D8-42EC-448E-959B-9EDBF4AAB5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31CCA0D8-42EC-448E-959B-9EDBF4AAB5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31CCA0D8-42EC-448E-959B-9EDBF4AAB5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31CCA0D8-42EC-448E-959B-9EDBF4AAB5C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1A3216-EE64-4851-B956-5EEF1D53C789}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6669DD72-DDCF-4F6E-8653-7CE02D81588E}
+	EndGlobalSection
+EndGlobal
