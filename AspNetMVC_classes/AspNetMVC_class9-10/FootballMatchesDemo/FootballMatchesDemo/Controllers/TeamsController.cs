@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using FootballMatchesDemo.Services;
 using FootballMatchesDemo.ViewModels;
 using FootballMatchesDemo.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace FootballMatchesDemo.Controllers
 {
@@ -66,8 +67,9 @@ namespace FootballMatchesDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletePlayer(TeamView team, int playerToDeleteID)
+        public IActionResult DeletePlayer(TeamView team, int playerToDeleteID)//IFormCollection formCollection)
         {
+            //var _team = this._teamServices.RemovePlayer(team, int.Parse(formCollection["playerToDeleteID"]));
             var _team = this._teamServices.RemovePlayer(team, playerToDeleteID);
             _team.Player.FirstName = "";
             _team.Player.LastName = "";
