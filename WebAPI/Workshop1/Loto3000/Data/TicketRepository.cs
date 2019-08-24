@@ -39,7 +39,7 @@ namespace Data
             {
                 db.Users.Update(entity.User);
                 db.Tickets.Add(entity);
-                db.SaveChanges();db.SaveChanges()
+                db.SaveChanges();
             }
         }
 
