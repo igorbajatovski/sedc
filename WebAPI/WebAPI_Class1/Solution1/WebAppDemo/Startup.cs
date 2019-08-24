@@ -28,7 +28,7 @@ namespace WebAppDemo
         {
             services.AddMvc(c =>
             {
-                c.RespectBrowserAcceptHeader = true;
+                c.RespectBrowserAcceptHeader = false;
                 c.InputFormatters.Add(new XmlSerializerInputFormatter(new MvcOptions()));
                 c.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });

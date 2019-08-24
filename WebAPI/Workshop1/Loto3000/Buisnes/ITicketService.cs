@@ -9,5 +9,6 @@ namespace Buisnes
     {
         IEnumerable<TicketModel> GetAll();
         void RegisterTicket(TicketModel ticket);
+        void ValidateTicket(TicketModel ticket);
     }
 }

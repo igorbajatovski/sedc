@@ -8,16 +8,20 @@ namespace DataModels
     public class LotoDbContext : DbContext
     {
         private readonly string _connectionString;
+        public static LotoDbContext LotoDb { get; set; }
 
         public LotoDbContext(string connectionString)
         {
             this._connectionString = connectionString;
+            LotoDbContext.LotoDb = this;
         }
+
+        public LotoDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(this._connectionString);
-            //options.UseSqlServer("Data Source=.;Initial Catalog=LotoDb;User ID=sa;Password=Password1");
+            //options.UseSqlServer("Data Source=.;Initial Catalog=LotoDb;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

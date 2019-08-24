@@ -37,8 +37,9 @@ namespace Data
         {
             using (var db = new LotoDbContext(this._connectionString))
             {
+                db.Users.Update(entity.User);
                 db.Tickets.Add(entity);
-                db.SaveChanges();
+                db.SaveChanges();db.SaveChanges()
             }
         }
 

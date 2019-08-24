@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using DataModels;
 using Models;
 using Data;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Buisnes
 {
@@ -32,11 +33,7 @@ namespace Buisnes
 
         public void RegisterUser(UserModel userModel)
         {
-            var userExists = this._userRepository.GetAll().Where(u => u.Username == userModel.Username).FirstOrDefault();
-            if(userExists != null)
-            {
-                throw new Exception($"User \"{userModel.Username}\" is already registered");
-            }
+            ValidateUser(userModel);
 
             User user = new User()
             {
@@ -48,6 +45,27 @@ namespace Buisnes
             };
 
             this._userRepository.Insert(user);
+        }
+
+        public void ValidateUser(UserModel user)
+        {   
+            if (user.Username.Length > 20)
+                throw new Exception("Username of user is longer then 20 characters");
+
+            if (user.FirstName.Length > 50)
+                throw new Exception("Username's first name is longer then 50 characters");
+
+            if (user.FirstName.Length > 50)
+                throw new Exception("Username's last name is longer then 50 characters");
+
+            if (user.Role != Role.Admin && user.Role != Role.User)
+                throw new Exception("Username's role is incorrect");
+
+            var userExists = this._userRepository.GetAll().Where(u => u.Username == user.Username).FirstOrDefault();
+            if (userExists != null)
+            {
+                throw new Exception($"User \"{user.Username}\" is already registered");
+            }
         }
     }
 }

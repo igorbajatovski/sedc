@@ -32,6 +32,7 @@ namespace WebApi
             services.AddSingleton(this.Configuration);
             services.AddTransient<IRepository<User>, UserRepository>();
             services.AddTransient<IRepository<Ticket>, TicketRepository>();
+            services.AddTransient<IRepository<RoundResults>, RoundResultsRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITicketService, TicketService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

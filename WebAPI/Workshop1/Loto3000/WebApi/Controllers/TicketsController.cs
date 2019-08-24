@@ -36,9 +36,9 @@ namespace WebApi.Controllers
 
         // POST: api/Tickets
         [HttpPost]
-        public void Post([FromBody] UserModel ticketModel)
+        public void Post([FromBody] TicketModel ticketModel)
         {
-
+            this._ticketService.RegisterTicket(ticketModel);
         }
 
         //// PUT: api/Tickets/5

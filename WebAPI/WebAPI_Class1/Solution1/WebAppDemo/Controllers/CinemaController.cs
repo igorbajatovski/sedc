@@ -43,7 +43,7 @@ namespace WebAppDemo.Controllers
         [HttpGet]
         public IEnumerable<Cinema> Filter(string name, string address)
         {
-            return _cinemas.Where(x => x.Name.ToLower().Contains(name) && x.Address.ToLower().Contains(address));
+            return _cinemas.Where(x => x.Name.ToLower().Contains(name.ToLower()) && x.Address.ToLower().Contains(address.ToLower()));
         }
 
         [Route("header")]
@@ -53,15 +53,15 @@ namespace WebAppDemo.Controllers
             return $"You are using {name}";
         }
 
-        //[Route("filterquery")]
-        //[HttpGet]
-        //public IEnumerable<Cinema> FilterQuery(string name, string address)
-        //{
-        //    name = name ?? string.Empty;
-        //    return _cinemas.Where(x => x.Name.ToLower().Contains(name) && x.Address.ToLower().Contains(address));
-        //}
-
         [Route("filterquery")]
+        [HttpGet]
+        public IEnumerable<Cinema> FilterQuery(string name, string address)
+        {
+            name = name ?? string.Empty;
+            return _cinemas.Where(x => x.Name.ToLower().Contains(name.ToLower()) && x.Address.ToLower().Contains(address.ToLower()));
+        }
+
+        [Route("filterquery1")]
         [HttpGet]
         public IEnumerable<Cinema> FilterQuery([FromQuery]FilterModel filter)
         {
