@@ -2,18 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace DataModels
 {
     public class LotoDbContext : DbContext
     {
         private readonly string _connectionString;
-        public static LotoDbContext LotoDb { get; set; }
 
-        public LotoDbContext(string connectionString)
+        public LotoDbContext(IConfiguration configuration)
         {
-            this._connectionString = connectionString;
-            LotoDbContext.LotoDb = this;
+            this._connectionString = configuration.GetConnectionString("LotoDb");
         }
 
         public LotoDbContext() { }

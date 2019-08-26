@@ -4,51 +4,42 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using DataModels;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
     public class RoundResultsRepository : IRepository<RoundResults>
     {
-        private readonly string _connectionString;
+        private readonly LotoDbContext _lotoDB;
 
-        public RoundResultsRepository(IConfiguration configuration)
+        public RoundResultsRepository(DbContext lotoDB)
         {
-            this._connectionString = configuration.GetConnectionString("LotoDb");
+            this._lotoDB = (LotoDbContext)lotoDB;
         }
 
         public void Delete(RoundResults entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.RoundResults.Remove(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.RoundResults.Remove(entity);
         }
 
         public IEnumerable<RoundResults> GetAll()
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                return db.RoundResults.ToList();
-            }
+            return _lotoDB.RoundResults.AsEnumerable();
         }
 
         public void Insert(RoundResults entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.RoundResults.Add(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.RoundResults.Add(entity);
+        }
+
+        public int Save()
+        {
+            return _lotoDB.SaveChanges();
         }
 
         public void Update(RoundResults entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.RoundResults.Update(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.RoundResults.Update(entity);
         }
     }
 }

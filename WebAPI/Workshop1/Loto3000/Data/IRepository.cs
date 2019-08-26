@@ -10,5 +10,6 @@ namespace Data
         void Insert(T entity);
         void Delete(T entity);
         void Update(T entity);
+        int Save();
     }
 }

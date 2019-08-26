@@ -45,6 +45,7 @@ namespace Buisnes
             };
 
             this._userRepository.Insert(user);
+            this._userRepository.Save();
         }
 
         public void ValidateUser(UserModel user)

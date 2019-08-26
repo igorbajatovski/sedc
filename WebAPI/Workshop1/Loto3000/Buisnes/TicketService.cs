@@ -53,6 +53,7 @@ namespace Buisnes
                 Status = Status.Pending,
                 User = ticketUser
             });
+            this._ticketRepository.Save();
         }
 
         public void ValidateTicket(TicketModel ticket)
@@ -62,22 +63,37 @@ namespace Buisnes
 
             var comb = ticket.Combination.Split(',');
             if(comb.Length < 7)
-                throw new Exception("Loto combination containes less then 7 digits");
+                throw new Exception("Loto combination containes less then 7 numbers");
 
             if (comb.Length > 7)
-                throw new Exception("Loto combination containes more then 7 digits");
+                throw new Exception("Loto combination containes more then 7 numbers");
 
+            List<int> ticketNum = new List<int>(7);
             Array.ForEach(comb, e =>
             {
                 if (!int.TryParse(e, out int number))
                     throw new Exception($"Loto number \"{e}\" is not a number");
                 if (number < 1 || number > 37)
                     throw new Exception($"Selected number \"{number}\" is not between 1 and 37");
+                ticketNum.Add(number);
             });
+
+            for(int i = 0; i < ticketNum.Count; ++i)
+            {
+                for (int j = i+1; j < ticketNum.Count; ++j)
+                {
+                    if (ticketNum[i] == ticketNum[j])
+                        throw new Exception($"Ticket number \"{ticketNum[i]}\" is duplicate");
+                }
+            }
 
             var ticketUser = this._userRepository.GetAll().Where(u => u.Id == ticket.UserId).FirstOrDefault();
             if(ticket == null)
                 throw new Exception("Ticket user does not exist");
+
+            if(ticketUser.Balance <= 0)
+                throw new Exception("User does not have money to buy a ticket");
+
         }
     }
 }

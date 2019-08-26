@@ -4,52 +4,44 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using DataModels;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
     public class TicketRepository : IRepository<Ticket>
     {
-        private readonly string _connectionString;
+        private readonly LotoDbContext _lotoDB;
 
-        public TicketRepository(IConfiguration configuration)
+        public TicketRepository(DbContext lotoDB)
         {
-            this._connectionString = configuration.GetConnectionString("LotoDb");
+            this._lotoDB = (LotoDbContext)lotoDB;
         }
 
         public void Delete(Ticket entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Tickets.Remove(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.Tickets.Remove(entity);
         }
 
         public IEnumerable<Ticket> GetAll()
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                return db.Tickets.ToList();
-            }
+            return _lotoDB.Tickets.AsEnumerable();
         }
 
         public void Insert(Ticket entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Users.Update(entity.User);
-                db.Tickets.Add(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.Users.Update(entity.User);
+            _lotoDB.Tickets.Add(entity);
+        }
+
+        public int Save()
+        {
+            return _lotoDB.SaveChanges();
         }
 
         public void Update(Ticket entity)
-        {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Tickets.Update(entity);
-                db.SaveChanges();
-            }
+        {   
+            _lotoDB.Users.Update(entity.User);
+            _lotoDB.Tickets.Update(entity);
         }
     }
 }

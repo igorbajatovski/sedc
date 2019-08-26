@@ -4,51 +4,42 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using DataModels;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
     public class UserRepository : IRepository<User>
     {
-        private readonly string _connectionString;
+        private readonly LotoDbContext _lotoDB;
 
-        public UserRepository(IConfiguration configuration)
+        public UserRepository(DbContext lotoDB)
         {
-            this._connectionString = configuration.GetConnectionString("LotoDb");
+            this._lotoDB = (LotoDbContext)lotoDB;
         }
 
         public void Delete(User entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Users.Remove(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.Users.Remove(entity);
         }
 
         public IEnumerable<User> GetAll()
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                return db.Users.ToList();
-            }
+            return _lotoDB.Users.AsEnumerable();
         }
 
         public void Insert(User entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Users.Add(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.Users.Add(entity);
+        }
+
+        public int Save()
+        {
+            return _lotoDB.SaveChanges();
         }
 
         public void Update(User entity)
         {
-            using (var db = new LotoDbContext(this._connectionString))
-            {
-                db.Users.Update(entity);
-                db.SaveChanges();
-            }
+            _lotoDB.Users.Update(entity);
         }
     }
 }

@@ -14,6 +14,7 @@ using Data;
 using Buisnes;
 using Data;
 using DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi
 {
@@ -30,11 +31,13 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(this.Configuration);
+            services.AddSingleton<DbContext, LotoDbContext>();
             services.AddTransient<IRepository<User>, UserRepository>();
             services.AddTransient<IRepository<Ticket>, TicketRepository>();
             services.AddTransient<IRepository<RoundResults>, RoundResultsRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITicketService, TicketService>();
+            services.AddTransient<IRoundResultsService, RoundResultsService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
