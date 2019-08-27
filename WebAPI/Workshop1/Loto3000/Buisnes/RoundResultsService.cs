@@ -26,6 +26,7 @@ namespace Buisnes
 
         public void DrawRound()
         {
+            //////////////////// izvlekuvanje na broevi ////////////////////
             Random rand = new Random(1);
             List<int> winningCombination = new List<int>();
             while (winningCombination.Count < 7)
@@ -34,6 +35,7 @@ namespace Buisnes
                 if (!winningCombination.Exists(n => n == drawedNumber))
                     winningCombination.Add(drawedNumber);
             }
+            ////////////////////////////////////////////////////////////////
 
             var pendingTickets = this._ticketRepository.GetAll().Where(t => t.Status == Status.Pending).ToList();
 

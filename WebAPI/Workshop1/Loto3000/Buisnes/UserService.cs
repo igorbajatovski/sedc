@@ -38,6 +38,7 @@ namespace Buisnes
             User user = new User()
             {
                 Username = userModel.Username,
+                Password = userModel.Password,
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Balance = 1000,
@@ -52,6 +53,9 @@ namespace Buisnes
         {   
             if (user.Username.Length > 20)
                 throw new Exception("Username of user is longer then 20 characters");
+
+            if (user.Password.Length > 20)
+                throw new Exception("Password of user is longer then 20 characters");
 
             if (user.FirstName.Length > 50)
                 throw new Exception("Username's first name is longer then 50 characters");

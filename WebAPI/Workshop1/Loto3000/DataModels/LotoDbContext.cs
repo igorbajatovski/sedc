@@ -21,6 +21,7 @@ namespace DataModels
         {
             options.UseSqlServer(this._connectionString);
             //options.UseSqlServer("Data Source=.;Initial Catalog=LotoDb;Integrated Security=True");
+            //options.UseSqlServer("Data Source=.;Initial Catalog=LotoDb;User ID=sa;Password=Password1");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

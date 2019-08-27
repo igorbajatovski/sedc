@@ -56,15 +56,16 @@ function enterLotoUsers(separator, startFirstName, startLastName)
                 xmlhttp.send(
                     `{  
                         "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
+						"Password":"Password${i}${j}",
                         "Firstname":"${FirstNames[i]}",
                         "Lastname":"${LastNames[j]}",
                         "Balance":1000,
                         "Role":2
                     }`
                 );
-            }, time+= 1500);
+            }, time+= 200);
         }
     }
 }
 
-enterLotoUsers(separator, 1, 0);
+enterLotoUsers(separator, 12, 0);
