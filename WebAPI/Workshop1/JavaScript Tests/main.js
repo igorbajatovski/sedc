@@ -22,7 +22,7 @@ let LastNames =
 ]
 
 
-let separator = ".";
+let separator = "_";
 
 
 function enterLotoUsers(separator, startFirstName, startLastName)
@@ -68,4 +68,4 @@ function enterLotoUsers(separator, startFirstName, startLastName)
     }
 }
 
-enterLotoUsers(separator, 0, 0);
+enterLotoUsers(separator, 19, 0);
