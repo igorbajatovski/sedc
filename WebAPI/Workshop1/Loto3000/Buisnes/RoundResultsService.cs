@@ -127,7 +127,17 @@ namespace Buisnes
 
         public IEnumerable<TicketModel> GetWinningTicktes()
         {
-            throw new NotImplementedException();
+            return this._ticketRepository.GetAll().Where(t => t.Status == Status.Win).Select(
+                t => new TicketModel()
+                    {
+                        Id = t.Id,
+                        AwardBalance = t.AwardBalance,
+                        Combination = t.Combination,
+                        Round = t.Round,
+                        Status = t.Status,
+                        UserId = t.UserId
+                    }
+            );
         }
     }
 }

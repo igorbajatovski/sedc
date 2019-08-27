@@ -19,34 +19,28 @@ namespace Data
 
         public void Delete(User entity)
         {
-            lock (_lotoDB)
-                _lotoDB.Users.Remove(entity);
+            _lotoDB.Users.Remove(entity);
         }
 
         public IEnumerable<User> GetAll()
         {
-            IEnumerable<User> ret;
-            lock (_lotoDB)
-                ret = _lotoDB.Users.AsEnumerable();
-            return ret;
+            var db = _lotoDB.getNewLotoDbContext();
+            return db.Users.AsEnumerable();
         }
 
         public void Insert(User entity)
         {
-            lock (_lotoDB)
-                _lotoDB.Users.Add(entity);
+            _lotoDB.Users.Add(entity);
         }
 
         public int Save()
         {
-            lock (_lotoDB)
-                return _lotoDB.SaveChanges();
+            return _lotoDB.SaveChanges();
         }
 
         public void Update(User entity)
         {
-            lock (_lotoDB)
-                _lotoDB.Users.Update(entity);
+            _lotoDB.Users.Update(entity);
         }
     }
 }

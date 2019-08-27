@@ -17,6 +17,16 @@ namespace DataModels
 
         public LotoDbContext() { }
 
+        public LotoDbContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public LotoDbContext getNewLotoDbContext()
+        {
+            return new LotoDbContext(this._connectionString);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(this._connectionString);

@@ -20,5 +20,7 @@ namespace Models
         public int Balance { get; set; }
 
         public Role Role { get; set; }
+
+        public string Token { get; set; }
     }
 }

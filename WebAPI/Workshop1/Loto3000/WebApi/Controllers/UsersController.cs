@@ -21,8 +21,9 @@ namespace WebApi.Controllers
         {
             this._userService = userService;
         }
-        
+
         // GET api/users
+        [Route("GetAll")]
         [HttpGet]
         public ActionResult<IEnumerable<UserModel>> Get()
         {
@@ -46,6 +47,7 @@ namespace WebApi.Controllers
 	        "Role": 2
         }
         */
+        [Route("Register")]
         [HttpPost]
         public IActionResult Post([FromBody] UserModel user)
         {
@@ -57,6 +59,13 @@ namespace WebApi.Controllers
             {
                 return this.BadRequest(ex.Message);
             }
+        }
+
+        [Route("Login")]
+        [HttpPost]
+        public IActionResult Login([FromBody] UserModel user)
+        {
+            return Ok(this._userService.Authenticate(user));
         }
 
         //// PUT api/users/5

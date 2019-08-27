@@ -10,5 +10,6 @@ namespace Buisnes
         IEnumerable<UserModel> GetAll();
         void RegisterUser(UserModel userModel);
         void ValidateUser(UserModel user);
+        UserModel Authenticate(UserModel user);
     }
 }

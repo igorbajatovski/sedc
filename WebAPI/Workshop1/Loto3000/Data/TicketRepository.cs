@@ -19,38 +19,30 @@ namespace Data
 
         public void Delete(Ticket entity)
         {
-            lock (_lotoDB)
-                _lotoDB.Tickets.Remove(entity);
+            _lotoDB.Tickets.Remove(entity);
         }
 
         public IEnumerable<Ticket> GetAll()
         {
-            lock (_lotoDB)
-                return _lotoDB.Tickets.AsEnumerable();
+            var db = _lotoDB.getNewLotoDbContext();
+            return db.Tickets.AsEnumerable();
         }
 
         public void Insert(Ticket entity)
         {
-            lock (_lotoDB)
-            {
-                _lotoDB.Users.Update(entity.User);
-                _lotoDB.Tickets.Add(entity);
-            }
+            _lotoDB.Users.Update(entity.User);
+            _lotoDB.Tickets.Add(entity);
         }
 
         public int Save()
         {
-            lock (_lotoDB)
                 return _lotoDB.SaveChanges();
         }
 
         public void Update(Ticket entity)
         {
-            lock (_lotoDB)
-            {
-                _lotoDB.Users.Update(entity.User);
-                _lotoDB.Tickets.Update(entity);
-            }
+            _lotoDB.Users.Update(entity.User);
+            _lotoDB.Tickets.Update(entity);
         }
     }
 }

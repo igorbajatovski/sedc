@@ -15,6 +15,10 @@ using Buisnes;
 using Data;
 using DataModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Models;
 
 namespace WebApi
 {
@@ -41,12 +45,40 @@ namespace WebApi
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            // Setup CORS
             services.AddCors(setup => setup.AddPolicy("AllowAnyOrigin", conf => {
                                                                                     conf.AllowAnyOrigin();
                                                                                     conf.AllowAnyMethod();
                                                                                     conf.AllowAnyHeader();
                                                                                 }
                 ));
+            // End of Setup CORS
+
+            // Setup of JWT token
+            var jwtSettingsSection = Configuration.GetSection("JwtSettings");
+            services.Configure<JwtSettings>(jwtSettingsSection);
+
+            var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+            var keyBytes = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(keyBytes)
+                    };
+                });
+            // end of Setup JWT token
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +92,8 @@ namespace WebApi
             {
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
             app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseMvc();

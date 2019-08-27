@@ -4,18 +4,71 @@ using DataModels;
 using Models;
 using Data;
 using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Extensions.Options;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+//using System.IdentityModel.Tokens.Jwt;
 
 namespace Buisnes
 {
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
+        private readonly JwtSettings _jwtSettings;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(IRepository<User> userRepository, IOptions<JwtSettings> jwtSettings)
         {
             this._userRepository = userRepository;
+            this._jwtSettings = jwtSettings.Value;
+        }
+
+        public UserModel Authenticate(UserModel user)
+        {
+            // Check if user exists
+            var md5 = new MD5CryptoServiceProvider();
+            var passwordBytes = Encoding.ASCII.GetBytes(user.Password);
+            var hashBytes = md5.ComputeHash(passwordBytes);
+            var hash = Encoding.ASCII.GetString(hashBytes);
+
+            var userExists = _userRepository.GetAll()
+                .FirstOrDefault(x => x.Password == hash && x.Username == user.Username);
+
+            if (userExists == null)
+                throw new Exception("Username or password is wrong.");
+            // End of Check if user exists
+
+            //Create token
+            var keyBytes = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+
+            var descriptor = new SecurityTokenDescriptor()
+            {
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature),
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                    new Claim(ClaimTypes.Email, user.Username),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                })
+            };
+
+            var token = jwtTokenHandler.CreateToken(descriptor);
+            var tokenString = jwtTokenHandler.WriteToken(token);
+
+            // Return user with token
+            var userAuth = new UserModel()
+            {   
+                Username = userExists.Username,
+                FirstName = userExists.FirstName,
+                LastName = userExists.LastName,
+                Token = tokenString
+            };
+            return userAuth;
         }
 
         public IEnumerable<UserModel> GetAll()
@@ -35,10 +88,15 @@ namespace Buisnes
         {
             ValidateUser(userModel);
 
+            var md5 = new MD5CryptoServiceProvider();
+            var passwordBytes = Encoding.ASCII.GetBytes(userModel.Password);
+            var hashBytes = md5.ComputeHash(passwordBytes);
+            var hash = Encoding.ASCII.GetString(hashBytes);
+
             User user = new User()
             {
                 Username = userModel.Username,
-                Password = userModel.Password,
+                Password = hash,
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Balance = 1000,
@@ -50,7 +108,19 @@ namespace Buisnes
         }
 
         public void ValidateUser(UserModel user)
-        {   
+        {
+            if(string.IsNullOrEmpty(user.Username))
+                throw new Exception("Username is required");
+
+            if (string.IsNullOrEmpty(user.FirstName))
+                throw new Exception("First name is required");
+
+            if (string.IsNullOrEmpty(user.LastName))
+                throw new Exception("Last name is required");
+
+            if (string.IsNullOrEmpty(user.Password))
+                throw new Exception("Password is required");
+
             if (user.Username.Length > 20)
                 throw new Exception("Username of user is longer then 20 characters");
 
