@@ -27,6 +27,7 @@ let separator = ".";
 
 function enterLotoUsers(separator, startFirstName, startLastName)
 {
+    let time = 0;
     for(let i = startFirstName; i < FirstNames.length; ++i)
     {
         for(let j = startLastName; j < LastNames.length; ++j)
@@ -36,27 +37,34 @@ function enterLotoUsers(separator, startFirstName, startLastName)
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
                     if (xmlhttp.status == 200) {
-                        console.log(`User ${firstName}${separator}${lastName} is registered`);
+                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is registered`);
                     }
                     else if (xmlhttp.status == 400) {
-                        console.log(`User ${firstName}${separator}${lastName} is not registered. Reason ${xmlhttp.status}.`);
+                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
                     }
                     else {
-                        console.log(`User ${firstName}${separator}${lastName} is not registered. Reason ${xmlhttp.status}.`);
+                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
                     }
                 }
             };
-            xmlhttp.setRequestHeader("Content-Type", "application/json");
-            xmlhttp.open("POST", "https://localhost:5001/api/users",false);
-            xmlhttp.send(
-                "{" + 
-                    `Username:${firstName}${separator}${lastName},
-                    "Firstname:"${firstName},
-                    "Lastname:"${lastName},
-                    "Balance:"1000,
-                    "Role:2"`
-                + "}"
-            );
+
+            
+            setTimeout(() => 
+            {  
+                xmlhttp.open("POST", "https://localhost:5001/api/users/",true);
+                xmlhttp.setRequestHeader("Content-Type", "application/json");
+                xmlhttp.send(
+                    `{  
+                        "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
+                        "Firstname":"${FirstNames[i]}",
+                        "Lastname":"${LastNames[j]}",
+                        "Balance":1000,
+                        "Role":2
+                    }`
+                );
+            }, time+= 1500);
         }
     }
 }
+
+enterLotoUsers(separator, 1, 0);

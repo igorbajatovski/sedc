@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Buisnes;
 using Models;
 using DataModels;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAnyOrigin")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -45,9 +47,16 @@ namespace WebApi.Controllers
         }
         */
         [HttpPost]
-        public void Post([FromBody] UserModel user)
+        public IActionResult Post([FromBody] UserModel user)
         {
-            this._userService.RegisterUser(user);
+            try
+            {
+                this._userService.RegisterUser(user);
+                return Ok("User is registered");
+            }catch(Exception ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
         }
 
         //// PUT api/users/5

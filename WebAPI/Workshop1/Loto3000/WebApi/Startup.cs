@@ -38,7 +38,15 @@ namespace WebApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<IRoundResultsService, RoundResultsService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors(setup => setup.AddPolicy("AllowAnyOrigin", conf => {
+                                                                                    conf.AllowAnyOrigin();
+                                                                                    conf.AllowAnyMethod();
+                                                                                    conf.AllowAnyHeader();
+                                                                                }
+                ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +60,7 @@ namespace WebApi
             {
                 app.UseHsts();
             }
-
+            app.UseCors("AllowAnyOrigin");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
