@@ -25,7 +25,7 @@ namespace Data
         public IEnumerable<User> GetAll()
         {
             var db = _lotoDB.getNewLotoDbContext();
-            return db.Users.AsEnumerable();
+            return db.Users.ToList();
         }
 
         public void Insert(User entity)

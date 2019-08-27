@@ -51,7 +51,7 @@ function enterLotoUsers(separator, startFirstName, startLastName)
             
             setTimeout(() => 
             {  
-                xmlhttp.open("POST", "https://localhost:5001/api/users/",true);
+                xmlhttp.open("POST", "https://localhost:5001/api/users/Register",true);
                 xmlhttp.setRequestHeader("Content-Type", "application/json");
                 xmlhttp.send(
                     `{  
@@ -68,4 +68,4 @@ function enterLotoUsers(separator, startFirstName, startLastName)
     }
 }
 
-enterLotoUsers(separator, 12, 0);
+enterLotoUsers(separator, 0, 0);
