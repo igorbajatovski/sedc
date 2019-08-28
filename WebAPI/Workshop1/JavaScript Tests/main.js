@@ -106,56 +106,61 @@ let LastNames =
 ]
 
 
-let separator = "_";
+let separator = ".";
 
 
 function enterLotoUsers(separator, startFirstName, startLastName)
 {
-    let time = 0;
-    for(let i = startFirstName; i < FirstNames.length; ++i)
-    {
-        for(let j = startLastName; j < LastNames.length; ++j)
+        let time = 0;
+        for(let i = startFirstName; i < FirstNames.length; ++i)
         {
-            let xmlhttp = new XMLHttpRequest();
-            
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                    if (xmlhttp.status == 200) {
-                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is registered`);
+            for(let j = startLastName; j < LastNames.length; ++j)
+            {      
+                let xmlhttp = new XMLHttpRequest();
+                
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                        if (xmlhttp.status == 200) {
+                            console.log(`User[${i}][${j}] ${FirstNames[i]}${separator}${LastNames[j]} is registered`);
+                        }
+                        else if (xmlhttp.status == 400) {
+                            console.log(`User[${i}][${j}] ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
+                        }
+                        else {
+                            console.log(`User[${i}][${j}] ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
+                        }
                     }
-                    else if (xmlhttp.status == 400) {
-                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
+                }; // end of onreadystatechange
+                
+                setTimeout(() => 
+                {  
+                    xmlhttp.open("POST", "https://localhost:5001/api/users/Register",true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/json");
+                    try
+                    {
+                        xmlhttp.send(
+                            /*`{  
+                                "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
+                                "Password":"Password${i}${j}",
+                                "Firstname":"${FirstNames[i]}",
+                                "Lastname":"${LastNames[j]}",
+                                "Balance":1000,
+                                "Role":2
+                            }`*/
+                            `{  
+                                "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
+                                "Password":"Password${i}${j}",
+                                "Firstname":"${FirstNames[i]}",
+                                "Lastname":"${LastNames[j]}"
+                            }`
+                        );
+                    }catch(e)
+                    {
+                        console.log(e);
                     }
-                    else {
-                        console.log(`User ${FirstNames[i]}${separator}${LastNames[j]} is not registered. Reason ${xmlhttp.status},${xmlhttp.responseText}.`);
-                    }
-                }
-            }; // end of onreadystatechange
-
-            
-            setTimeout(() => 
-            {  
-                xmlhttp.open("POST", "https://localhost:5001/api/users/Register",true);
-                xmlhttp.setRequestHeader("Content-Type", "application/json");
-                xmlhttp.send(
-                    /*`{  
-                        "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
-						"Password":"Password${i}${j}",
-                        "Firstname":"${FirstNames[i]}",
-                        "Lastname":"${LastNames[j]}",
-                        "Balance":1000,
-                        "Role":2
-                    }`*/
-                    `{  
-                        "Username":"${FirstNames[i]}${separator}${LastNames[j]}",
-						"Password":"Password${i}${j}",
-                        "Firstname":"${FirstNames[i]}",
-                        "Lastname":"${LastNames[j]}",
-                    }`
-                );
-            }, time+= 200);
-        }
-    }
+                }, /*time+= 200*/ 0 );
+            }
+        }//end of for
 }
 
-enterLotoUsers(separator, 19, 0);
+enterLotoUsers(separator, 0, 0);

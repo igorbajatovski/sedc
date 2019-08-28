@@ -57,7 +57,14 @@ namespace WebApi.Controllers
                 return Ok("User is registered");
             }catch(Exception ex)
             {
-                return this.BadRequest(ex.Message);
+                string errMessage = ex.Message;
+                while(ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errMessage += "\\r\\n";
+                    errMessage += ex.Message;
+                }
+                return this.BadRequest(errMessage);
             }
         }
 

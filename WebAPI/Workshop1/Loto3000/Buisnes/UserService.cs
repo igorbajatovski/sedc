@@ -132,9 +132,6 @@ namespace Buisnes
             if (user.FirstName.Length > 50)
                 throw new Exception("Username's last name is longer then 50 characters");
 
-            if (user.Role != Role.Admin && user.Role != Role.User)
-                throw new Exception("Username's role is incorrect");
-
             var userExists = this._userRepository.GetAll().Where(u => u.Username == user.Username).FirstOrDefault();
             if (userExists != null)
             {
