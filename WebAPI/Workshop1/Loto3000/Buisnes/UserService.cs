@@ -129,7 +129,7 @@ namespace Buisnes
             if (user.FirstName.Length > 50)
                 throw new Exception("Username's first name is longer then 50 characters");
 
-            if (user.FirstName.Length > 50)
+            if (user.LastName.Length > 50)
                 throw new Exception("Username's last name is longer then 50 characters");
 
             var userExists = this._userRepository.GetAll().Where(u => u.Username == user.Username).FirstOrDefault();
