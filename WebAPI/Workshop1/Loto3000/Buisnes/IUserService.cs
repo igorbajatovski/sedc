@@ -8,8 +8,7 @@ namespace Buisnes
     public interface IUserService
     {
         IEnumerable<UserModel> GetAll();
-        void RegisterUser(UserModel userModel);
-        void ValidateUser(UserModel user);
+        void RegisterUser(UserModel user);
         UserModel Authenticate(UserModel user);
     }
 }

@@ -106,8 +106,12 @@ let LastNames =
 ]
 
 
-let separator = ".";
+let separator = "@";
 
+function sendJson()
+{
+    
+}
 
 function enterLotoUsers(separator, startFirstName, startLastName)
 {
@@ -158,9 +162,12 @@ function enterLotoUsers(separator, startFirstName, startLastName)
                     {
                         console.log(e);
                     }
-                }, /*time+= 200*/ 0 );
+                }, time+= 200 );
             }
+
+            j = 0;
+
         }//end of for
 }
 
-enterLotoUsers(separator, 0, 0);
+enterLotoUsers(separator, 25, 0);

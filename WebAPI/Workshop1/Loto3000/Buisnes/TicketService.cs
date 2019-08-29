@@ -56,7 +56,7 @@ namespace Buisnes
             this._ticketRepository.Save();
         }
 
-        public void ValidateTicket(TicketModel ticket)
+        private void ValidateTicket(TicketModel ticket)
         {
             if (ticket.Combination.Length > 20)
                 throw new Exception("Value for loto combination too large");

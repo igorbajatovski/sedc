@@ -37,6 +37,8 @@ namespace Buisnes
             }
             ////////////////////////////////////////////////////////////////
 
+
+            ////////////// Najdi dobitni/ne dobitni livcinja //////////////////////////
             var pendingTickets = this._ticketRepository.GetAll().Where(t => t.Status == Status.Pending).ToList();
 
             pendingTickets.ForEach(t =>
@@ -77,11 +79,20 @@ namespace Buisnes
                 t.User.Balance += t.AwardBalance;
             });
 
+            ////////////////////////////////////////////////////////////////
+
+
+            ////////////////// Napravi RoundResult rekord //////////////////
             var roundResults = new RoundResults()
             {
                 WinningCombination = string.Join(",", winningCombination)
             };
+            ////////////////////////////////////////////////////////////////
 
+
+            ///////////////  Azuriraj dobitni/ne dobitni livcinja //////////
+            ///////////////  Azuriraj go balansot na korisnikot   //////////
+            ///////////////  ako ima dobitno livce                //////////
             pendingTickets.ForEach(t => this._ticketRepository.Update(t));
             this._roundResultsRepository.Insert(roundResults);
             this._roundResultsRepository.Save();

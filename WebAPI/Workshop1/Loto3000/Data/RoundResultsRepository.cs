@@ -19,28 +19,32 @@ namespace Data
 
         public void Delete(RoundResults entity)
         {
-            _lotoDB.RoundResults.Remove(entity);
+            lock (_lotoDB)
+                _lotoDB.RoundResults.Remove(entity);
         }
 
         public IEnumerable<RoundResults> GetAll()
         {
-            var db = _lotoDB.getNewLotoDbContext();
-            return db.RoundResults.AsEnumerable();
+            lock (_lotoDB)
+                return _lotoDB.RoundResults.ToList();
         }
 
         public void Insert(RoundResults entity)
         {
-            _lotoDB.RoundResults.Add(entity);
+            lock (_lotoDB)
+                _lotoDB.RoundResults.Add(entity);
         }
 
         public int Save()
         {
-            return _lotoDB.SaveChanges();
+            lock (_lotoDB)
+                return _lotoDB.SaveChanges();
         }
 
         public void Update(RoundResults entity)
         {
-            _lotoDB.RoundResults.Update(entity);
+            lock (_lotoDB)
+                _lotoDB.RoundResults.Update(entity);
         }
     }
 }

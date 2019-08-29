@@ -83,30 +83,30 @@ namespace Buisnes
             });
         }
 
-        public void RegisterUser(UserModel userModel)
+        public void RegisterUser(UserModel user)
         {
-            ValidateUser(userModel);
+            ValidateUser(user);
 
             var md5 = new MD5CryptoServiceProvider();
-            var passwordBytes = Encoding.ASCII.GetBytes(userModel.Password);
+            var passwordBytes = Encoding.ASCII.GetBytes(user.Password);
             var hashBytes = md5.ComputeHash(passwordBytes);
             var hash = Encoding.ASCII.GetString(hashBytes);
 
-            User user = new User()
+            User registeredUser = new User()
             {
-                Username = userModel.Username,
+                Username = user.Username,
                 Password = hash,
-                FirstName = userModel.FirstName,
-                LastName = userModel.LastName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Balance = 1000,
                 Role = Role.User
             };
 
-            this._userRepository.Insert(user);
+            this._userRepository.Insert(registeredUser);
             this._userRepository.Save();
         }
 
-        public void ValidateUser(UserModel user)
+        private void ValidateUser(UserModel user)
         {
             if(string.IsNullOrEmpty(user.Username))
                 throw new Exception("Username is required");
