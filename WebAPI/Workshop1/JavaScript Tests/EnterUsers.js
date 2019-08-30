@@ -264,5 +264,5 @@ userjSon =
     }`
 enterLotoUsers(userjSon);
 
-let separator = "@";
-//enterLotoUsers(separator, 0, 0);
+let separator = "_";
+enterLotoUsers(separator, 0, 0);

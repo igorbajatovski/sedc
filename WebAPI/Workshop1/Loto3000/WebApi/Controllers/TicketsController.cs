@@ -22,6 +22,7 @@ namespace WebApi.Controllers
 
         // GET: api/Tickets
         [HttpGet]
+        [Route("GetAll")]
         public ActionResult<IEnumerable<TicketModel>> Get()
         {
             return this._ticketService.GetAll().ToList();
@@ -36,9 +37,23 @@ namespace WebApi.Controllers
 
         // POST: api/Tickets
         [HttpPost]
-        public void Post([FromBody] TicketModel ticketModel)
+        [Route("Register")]
+        public IActionResult Post([FromBody] TicketModel ticketModel)
         {
-            this._ticketService.RegisterTicket(ticketModel);
+            try
+            {
+                this._ticketService.RegisterTicket(ticketModel);
+                return this.Ok("Ticket is registered");
+            }catch(Exception ex)
+            {
+                string errorMsg = ex.Message;
+                while(ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errorMsg += "\\r\\n" + ex.Message;
+                }
+                return this.BadRequest(errorMsg);
+            }
         }
 
         //// PUT: api/Tickets/5

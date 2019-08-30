@@ -30,6 +30,14 @@ namespace WebApi.Controllers
             return this._userService.GetAll().ToList();
         }
 
+        // GET api/users
+        [Route("GetUserIds")]
+        [HttpGet]
+        public ActionResult<IEnumerable<int>> GetAllById()
+        {
+            return this._userService.GetAll().Select(u => u.Id).ToList();
+        }
+
         //// GET api/users/5
         //[HttpGet("{id}")]
         //public ActionResult<string> Get(int id)

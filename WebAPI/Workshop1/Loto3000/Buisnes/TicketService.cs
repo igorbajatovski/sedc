@@ -58,8 +58,8 @@ namespace Buisnes
 
         private void ValidateTicket(TicketModel ticket)
         {
-            if (ticket.Combination.Length > 20)
-                throw new Exception("Value for loto combination too large");
+            if(string.IsNullOrEmpty(ticket.Combination))
+                throw new Exception("Enter numbers for loto ticket");
 
             var comb = ticket.Combination.Split(',');
             if(comb.Length < 7)
@@ -88,7 +88,7 @@ namespace Buisnes
             }
 
             var ticketUser = this._userRepository.GetAll().Where(u => u.Id == ticket.UserId).FirstOrDefault();
-            if(ticket == null)
+            if(ticketUser == null)
                 throw new Exception("Ticket user does not exist");
 
             if(ticketUser.Balance <= 0)
