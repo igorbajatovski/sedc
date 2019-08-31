@@ -25,7 +25,13 @@ namespace Buisnes
         }
 
         public void DrawRound()
-        {
+        {   
+            ////////// Zapisi izvlekuvanje bez dobitnite broevi /////////////
+            ////////// Ova oznacuva pocetok na izvlekuvanjeto ///////////////
+            var roundResults = new RoundResults() {};
+            this._roundResultsRepository.Insert(roundResults);
+            this._roundResultsRepository.Save();
+
             //////////////////// izvlekuvanje na broevi ////////////////////
             Random rand = new Random(1);
             List<int> winningCombination = new List<int>();
@@ -84,11 +90,11 @@ namespace Buisnes
             ////////////////////////////////////////////////////////////////
 
 
-            ////////////////// Napravi RoundResult rekord //////////////////
-            var roundResults = new RoundResults()
-            {
-                WinningCombination = string.Join(",", winningCombination)
-            };
+            ////////////////// Azururaj RoundResult rekord //////////////////
+            ////////////////// so dobitno livce. Ova oznacuva ///////////////
+            ////////////////// kraj na izvlekuvanjeto ///////////////////////
+            roundResults = this._roundResultsRepository.GetAll().Where(r => r.WinningCombination == null).First();
+            roundResults.WinningCombination = string.Join(",", winningCombination);
             ////////////////////////////////////////////////////////////////
 
 
@@ -96,7 +102,7 @@ namespace Buisnes
             ///////////////  Azuriraj go balansot na korisnikot   //////////
             ///////////////  ako ima dobitno livce                //////////
             pendingTickets.ForEach(t => this._ticketRepository.Update(t));
-            this._roundResultsRepository.Insert(roundResults);
+            this._roundResultsRepository.Update(roundResults);
             this._roundResultsRepository.Save();
         }
 

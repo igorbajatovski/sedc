@@ -38,7 +38,7 @@ namespace Buisnes
         {
             ValidateTicket(ticket);
 
-            var lastRound = this._roundResultsRepository.GetAll().Count();
+            var lastRound = this._roundResultsRepository.GetAll().Max(r => r.RoundId);
 
             var ticketUser = this._userRepository.GetAll().Where(u => u.Id == ticket.UserId).First();
             ticketUser.Balance -= 50;
@@ -58,15 +58,19 @@ namespace Buisnes
 
         private void ValidateTicket(TicketModel ticket)
         {
-            if(string.IsNullOrEmpty(ticket.Combination))
-                throw new Exception("Enter numbers for loto ticket");
+            var isDrawStarted = this._roundResultsRepository.GetAll().Where(r => r.WinningCombination == null).FirstOrDefault();
+            if (isDrawStarted != null)
+                throw new Exception("Draw round is already started.");
+
+            if (string.IsNullOrEmpty(ticket.Combination))
+                throw new Exception("Enter numbers for loto ticket.");
 
             var comb = ticket.Combination.Split(',');
             if(comb.Length < 7)
-                throw new Exception("Loto combination containes less then 7 numbers");
+                throw new Exception("Loto combination containes less then 7 numbers.");
 
             if (comb.Length > 7)
-                throw new Exception("Loto combination containes more then 7 numbers");
+                throw new Exception("Loto combination containes more then 7 numbers.");
 
             List<int> ticketNum = new List<int>(7);
             Array.ForEach(comb, e =>
@@ -74,7 +78,7 @@ namespace Buisnes
                 if (!int.TryParse(e, out int number))
                     throw new Exception($"Loto number \"{e}\" is not a number");
                 if (number < 1 || number > 37)
-                    throw new Exception($"Selected number \"{number}\" is not between 1 and 37");
+                    throw new Exception($"Selected number \"{number}\" is not between 1 and 37.");
                 ticketNum.Add(number);
             });
 
@@ -83,16 +87,16 @@ namespace Buisnes
                 for (int j = i+1; j < ticketNum.Count; ++j)
                 {
                     if (ticketNum[i] == ticketNum[j])
-                        throw new Exception($"Ticket number \"{ticketNum[i]}\" is duplicate");
+                        throw new Exception($"Ticket number \"{ticketNum[i]}\" is duplicate.");
                 }
             }
 
             var ticketUser = this._userRepository.GetAll().Where(u => u.Id == ticket.UserId).FirstOrDefault();
             if(ticketUser == null)
-                throw new Exception("Ticket user does not exist");
+                throw new Exception("Ticket user does not exist.");
 
             if(ticketUser.Balance <= 0)
-                throw new Exception("User does not have money to buy a ticket");
+                throw new Exception("User does not have money to buy a ticket.");
 
         }
     }
