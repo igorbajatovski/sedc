@@ -32,6 +32,8 @@ namespace Buisnes
             while (winningCombination.Count < 7)
             {
                 int drawedNumber = rand.Next(37);
+                if (drawedNumber == 0)
+                    continue;
                 if (!winningCombination.Exists(n => n == drawedNumber))
                     winningCombination.Add(drawedNumber);
             }

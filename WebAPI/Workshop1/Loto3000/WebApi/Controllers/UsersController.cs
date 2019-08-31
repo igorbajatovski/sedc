@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         // GET api/users
         [Route("GetAll")]
         [HttpGet]
-        public ActionResult<IEnumerable<UserModel>> Get()
+        public ActionResult<IEnumerable<UserModel>> GetAll()
         {
             return this._userService.GetAll().ToList();
         }
@@ -38,26 +38,18 @@ namespace WebApi.Controllers
             return this._userService.GetAll().Select(u => u.Id).ToList();
         }
 
-        //// GET api/users/5
-        //[HttpGet("{id}")]
-        //public ActionResult<string> Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST api/users
         /*
         {
-	        "Username": "igorbajatovski@gmail.com",
+	        "Username": "igor_bajatovski",
+            "Password": "Pa$$w0rd",
 	        "Firstname": "Igor",
 	        "Lastname": "Bajatovski",
-	        "Balance": 1000,
-	        "Role": 2
         }
         */
         [Route("Register")]
         [HttpPost]
-        public IActionResult Post([FromBody] UserModel user)
+        public IActionResult Register([FromBody] UserModel user)
         {
             try
             {
@@ -82,17 +74,5 @@ namespace WebApi.Controllers
         {
             return Ok(this._userService.Authenticate(user));
         }
-
-        //// PUT api/users/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/users/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

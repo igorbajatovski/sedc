@@ -23,27 +23,26 @@ namespace WebApi.Controllers
         // GET: api/Tickets
         [HttpGet]
         [Route("GetAll")]
-        public ActionResult<IEnumerable<TicketModel>> Get()
+        public ActionResult<IEnumerable<TicketModel>> GetAll()
         {
             return this._ticketService.GetAll().ToList();
         }
 
-        //// GET: api/Tickets/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
         // POST: api/Tickets
+        /*
+         * {
+         *      "UserId": 1,
+         *      "Combination": "1,2,3,4,5,6,7"
+         * }
+         */
         [HttpPost]
         [Route("Register")]
-        public IActionResult Post([FromBody] TicketModel ticketModel)
+        public IActionResult Register([FromBody] TicketModel ticketModel)
         {
             try
             {
                 this._ticketService.RegisterTicket(ticketModel);
-                return this.Ok("Ticket is registered");
+                return this.Ok($"Ticket \"{ticketModel.Combination}\" for user \"{ticketModel.UserId}\" is registered");
             }catch(Exception ex)
             {
                 string errorMsg = ex.Message;
@@ -55,17 +54,5 @@ namespace WebApi.Controllers
                 return this.BadRequest(errorMsg);
             }
         }
-
-        //// PUT: api/Tickets/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

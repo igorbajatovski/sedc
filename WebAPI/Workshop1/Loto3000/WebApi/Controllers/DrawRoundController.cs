@@ -19,39 +19,72 @@ namespace WebApi.Controllers
         {
             this._roundResultsService = roundResultsService;
         }
+
         // GET: api/DrawRound
-        [Route("All")]
+        [Route("GetAll")]
         [HttpGet]
-        public ActionResult<IEnumerable<RoundResultsModel>> Get()
+        public ActionResult<IEnumerable<RoundResultsModel>> GetAll()
         {
-            return this._roundResultsService.GetAll().ToList();
+            try
+            {
+                var allRounds = this._roundResultsService.GetAll().ToList();
+                return allRounds;
+            }catch(Exception ex)
+            {
+                string errMessage = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errMessage += "\\r\\n";
+                    errMessage += ex.Message;
+                }
+                return this.BadRequest(errMessage);
+            }
         }
 
-        //// GET: api/DrawRound/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET: api/DrawRound
+        [Route("GetWinningTickets")]
+        [HttpGet]
+        public ActionResult<IEnumerable<TicketModel>> GetWinningTickets()
+        {
+            try
+            {
+                var winningTickets = this._roundResultsService.GetWinningTicktes().ToList();
+                return winningTickets;
+            }
+            catch (Exception ex)
+            {
+                string errMessage = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errMessage += "\\r\\n";
+                    errMessage += ex.Message;
+                }
+                return this.BadRequest(errMessage);
+            }
+        }
 
         // POST: api/DrawRound
         [Route("Draw")]
-        [HttpPost]
-        public void Draw()
+        [HttpGet]
+        public IActionResult Draw()
         {
-            this._roundResultsService.DrawRound();
+            try
+            {
+                this._roundResultsService.DrawRound();
+                return this.Ok();
+            }catch(Exception ex)
+            {
+                string errMessage = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errMessage += "\\r\\n";
+                    errMessage += ex.Message;
+                }
+                return this.BadRequest(errMessage);
+            }
         }
-
-        //// PUT: api/DrawRound/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
