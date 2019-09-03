@@ -82,7 +82,7 @@ async function enterTickets(separator)
                 "Combination":"${ticketCombination.join(',')}"
             }`
             //console.log(ticketJSon);
-            let response = await enterTicket(ticketJSon, time += 200, user.Token);
+            let response = await enterTicket(ticketJSon, time += 200, user.token);
             console.log(response);
         }
     }
