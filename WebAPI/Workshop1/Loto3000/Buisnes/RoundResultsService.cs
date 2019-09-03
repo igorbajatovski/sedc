@@ -25,7 +25,14 @@ namespace Buisnes
         }
 
         public void DrawRound()
-        {   
+        {
+            ///////////////// Proveri dali ima uplateno livcinja. //////////////////////
+            ///////////////// Ako ima moze da se pocne so izvlekuvanje /////////////////
+            int pendingTicketsCount = this._ticketRepository.GetAll().Where(t => t.Status == Status.Pending).Count();
+
+            if (pendingTicketsCount == 0)
+                throw new Exception("Draw round can not be started, no pending tickets.");
+
             ////////// Zapisi izvlekuvanje bez dobitnite broevi /////////////
             ////////// Ova oznacuva pocetok na izvlekuvanjeto ///////////////
             var roundResults = new RoundResults() {};
@@ -33,7 +40,7 @@ namespace Buisnes
             this._roundResultsRepository.Save();
 
             //////////////////// izvlekuvanje na broevi ////////////////////
-            Random rand = new Random(1);
+            Random rand = new Random();
             List<int> winningCombination = new List<int>();
             while (winningCombination.Count < 7)
             {
