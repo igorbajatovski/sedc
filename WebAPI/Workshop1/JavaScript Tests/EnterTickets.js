@@ -1,5 +1,5 @@
 
-function callWebApiMethod(url, method, bodyMessage = null, timeDelay = 0)
+function callWebApiMethod(url, method, bodyMessage = null, timeDelay = 0, token = null)
 {      
     let prom = new Promise( (resolve, reject) =>
     {
@@ -22,6 +22,8 @@ function callWebApiMethod(url, method, bodyMessage = null, timeDelay = 0)
             
             xmlhttp.open(method, url, true);
             xmlhttp.setRequestHeader("Content-Type", "application/json");
+            if(token !== null)
+                xmlhttp.setRequestHeader("Authorization", `Bearer ${token}`);
             if(bodyMessage !== null)
                 xmlhttp.send(bodyMessage);
             else
@@ -33,30 +35,56 @@ function callWebApiMethod(url, method, bodyMessage = null, timeDelay = 0)
     return prom;
 }
 
-async function enterTicket(ticketJSon, time)
+function loginUser(userJson, time)
 {
-    let response =  await callWebApiMethod("https://localhost:5001/api/tickets/Register/", "POST", ticketJSon, time)
-                                .then(value => value)
+    return callWebApiMethod("https://localhost:5001/api/users/login/", "POST", userJson, time)
+                                .then(value => JSON.parse(value))
                                 .catch(reason => reason);
-    console.log(response);
 }
 
-async function enterTickets()
+async function enterTicket(ticketJSon, time, token)
+{
+    // let response =  await callWebApiMethod("https://localhost:5001/api/tickets/Register/", "POST", ticketJSon, time, token)
+    //                             .then(value => value)
+    //                             .catch(reason => reason);
+    return callWebApiMethod("https://localhost:5001/api/tickets/Register/", "POST", ticketJSon, time, token)
+                                .then(value => value)
+                                .catch(reason => reason);
+    //console.log(response);
+}
+
+async function enterTickets(separator)
 {   
-    let userIds =  await callWebApiMethod("https://localhost:5001/api/users/GetUserIds/", "GET").then(value => JSON.parse(value)).catch(reason => reason);
+    //let userIds =  await callWebApiMethod("https://localhost:5001/api/users/GetUserIds/", "GET").then(value => JSON.parse(value)).catch(reason => reason);
     //console.log(userIds);
 
     let time = 0;
-    for(let userId of userIds)
+    for(let i = 0; i < FirstNames.length; ++i)
     {
-        let ticketCombination = generateTicketCombination(1,37);
-        let ticketJSon = 
-        `{  
-            "UserId":${userId},
-            "Combination":"${ticketCombination.join(',')}"
-        }`
-        //console.log(ticketJSon);
-        enterTicket(ticketJSon, time += 200);
+        for(let j = 0; j < LastNames.length; ++j)
+        {
+            let ticketCombination = generateTicketCombination(1,37);
+            
+            let userJSon = 
+                `{
+                    "Username": "${FirstNames[i]}${separator}${LastNames[j]}",
+                    "Password": "Password${i}${j}"
+                }`
+            let user = await loginUser(userJSon, 200);
+            console.log(`User ${user.username} is logged in.`);
+            // let ticketJSon = 
+            // `{  
+            //     "UserId":${userId},
+            //     "Combination":"${ticketCombination.join(',')}"
+            // }`
+            let ticketJSon = 
+            `{  
+                "Combination":"${ticketCombination.join(',')}"
+            }`
+            //console.log(ticketJSon);
+            let response = await enterTicket(ticketJSon, time += 200, user.Token);
+            console.log(response);
+        }
     }
 }
 
@@ -82,6 +110,8 @@ function generateTicketCombination(from, to)
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+let token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlBhdHJpY2lhIFdhbGtlciIsImVtYWlsIjoiUGF0cmljaWEuV2Fsa2VyIiwibmFtZWlkIjoiNTUxNiIsIm5iZiI6MTU2NzUzMjU4MSwiZXhwIjoxNTY4MTM3MzgxLCJpYXQiOjE1Njc1MzI1ODF9.hQBkzFghPQAmlrxExXgiUfXMD68dxB_I998vZUmvx4I`;
+
 let time = 200;
 
 let ticketJSon = 
@@ -89,79 +119,79 @@ let ticketJSon =
         "UserId":1,
         "Combination":"1,2,3,4,5,6,7,8"
     }`
-enterTicket(ticketJSon, time);
+enterTicket(ticketJSon, time, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":"1,2,3,4,5,6"
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":"1,2,6,4,5,6,9"
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":"-1,2,3,4,5,6,9"
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":"1,2,3,4,38,6,9"
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":"1,2,b,4,5,6,9"
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
 ticketJSon = 
     `{  
         "UserId":1,
         "Combination":""
     }`
-enterTicket(ticketJSon, time =+ 200);
+enterTicket(ticketJSon, time =+ 200, token);
 
-ticketJSon = 
-    `{  
-        "UserId":9999999,
-        "Combination":"1,2,3,4,5,6,9"
-    }`
-enterTicket(ticketJSon, time =+ 200);
+// ticketJSon = 
+//     `{  
+//         "UserId":9999999,
+//         "Combination":"1,2,3,4,5,6,9"
+//     }`
+// enterTicket(ticketJSon, time =+ 200, token);
 
 
-ticketJSon = 
-    `{  
-        "UserId":,,
-        "Combination":"1,2,3,4,5,6,9"
-    }`
-enterTicket(ticketJSon, time =+ 200);
+// ticketJSon = 
+//     `{  
+//         "UserId":,,
+//         "Combination":"1,2,3,4,5,6,9"
+//     }`
+// enterTicket(ticketJSon, time =+ 200, token);
 
-ticketJSon = 
-    `{  
-        "UserId":a,
-        "Combination":"1,2,3,4,5,6,9"
-    }`
-enterTicket(ticketJSon, time =+ 200);
+// ticketJSon = 
+//     `{  
+//         "UserId":a,
+//         "Combination":"1,2,3,4,5,6,9"
+//     }`
+// enterTicket(ticketJSon, time =+ 200);
 
-ticketJSon = 
-    `{  
-        "UserId":"a",
-        "Combination":"1,2,3,4,5,6,9"
-    }`
-enterTicket(ticketJSon, time =+ 200);
+// ticketJSon = 
+//     `{  
+//         "UserId":"a",
+//         "Combination":"1,2,3,4,5,6,9"
+//     }`
+// enterTicket(ticketJSon, time =+ 200);
 
-enterTickets();
+enterTickets(".");
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
