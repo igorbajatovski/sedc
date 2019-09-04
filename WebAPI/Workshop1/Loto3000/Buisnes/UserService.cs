@@ -36,7 +36,7 @@ namespace Buisnes
                 .FirstOrDefault(x => x.Password == hash && x.Username == user.Username);
 
             if (userExists == null)
-                throw new Exception("Username or password is wrong.");
+                throw new Exception("Username and/or password is wrong.");
             // End of Check if user exists
 
             //Create token

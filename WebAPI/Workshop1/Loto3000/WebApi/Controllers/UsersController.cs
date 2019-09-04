@@ -7,6 +7,7 @@ using Buisnes;
 using Models;
 using DataModels;
 using Microsoft.AspNetCore.Cors;
+using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
@@ -23,20 +24,28 @@ namespace WebApi.Controllers
         }
 
         // GET api/users
-        [Route("GetAll")]
+        [Route("Home")]
         [HttpGet]
-        public ActionResult<IEnumerable<UserModel>> GetAll()
+        public ActionResult<string> Home()
         {
-            return this._userService.GetAll().ToList();
+            return this.Ok("Welcome, this is loto application.");
         }
 
         // GET api/users
-        [Route("GetUserIds")]
-        [HttpGet]
-        public ActionResult<IEnumerable<int>> GetAllById()
-        {
-            return this._userService.GetAll().Select(u => u.Id).ToList();
-        }
+        //[Route("GetAll")]
+        //[HttpGet]
+        //public ActionResult<IEnumerable<UserModel>> GetAll()
+        //{
+        //    return this._userService.GetAll().ToList();
+        //}
+
+        // GET api/users
+        //[Route("GetUserIds")]
+        //[HttpGet]
+        //public ActionResult<IEnumerable<int>> GetAllById()
+        //{
+        //    return this._userService.GetAll().Select(u => u.Id).ToList();
+        //}
 
         // POST api/users
         /*
@@ -61,7 +70,7 @@ namespace WebApi.Controllers
                 while(ex.InnerException != null)
                 {
                     ex = ex.InnerException;
-                    errMessage += "\\r\\n";
+                    errMessage += "\r\n";
                     errMessage += ex.Message;
                 }
                 return this.BadRequest(errMessage);
@@ -72,7 +81,21 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] UserModel user)
         {
-            return Ok(this._userService.Authenticate(user));
+            try
+            {
+                return Ok(this._userService.Authenticate(user));
+            }
+            catch(Exception ex)
+            {
+                string errMessage = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    ex = ex.InnerException;
+                    errMessage += "\r\n";
+                    errMessage += ex.Message;
+                }
+                return this.BadRequest(errMessage);
+            }
         }
     }
 }
