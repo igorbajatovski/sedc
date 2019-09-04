@@ -50,9 +50,9 @@ namespace Buisnes
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-                    new Claim(ClaimTypes.Email, user.Username),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, $"{userExists.FirstName} {userExists.LastName}"),
+                    new Claim(ClaimTypes.Email, userExists.Username),
+                    new Claim(ClaimTypes.NameIdentifier, userExists.Id.ToString()),
                 })
             };
 
