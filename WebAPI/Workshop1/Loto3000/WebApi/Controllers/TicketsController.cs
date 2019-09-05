@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             try
             {
                 int userID = this.GetAuthorizedUserId();
-                ticketModel.Id = userID;
+                ticketModel.UserId = userID;
                 this._ticketService.RegisterTicket(ticketModel);
                 return this.Ok($"Ticket \"{ticketModel.Combination}\" for user \"{ticketModel.UserId}\" is registered");
             }catch(Exception ex)
