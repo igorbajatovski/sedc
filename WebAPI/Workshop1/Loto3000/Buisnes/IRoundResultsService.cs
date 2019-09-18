@@ -10,5 +10,6 @@ namespace Buisnes
         IEnumerable<RoundResultsModel> GetAll();
         void DrawRound();
         IEnumerable<TicketModel> GetWinningTicktes();
+        IEnumerable<TicketModel> GetWinningTicktesFromLastRound();
     }
 }

@@ -10,5 +10,6 @@ namespace Buisnes
         IEnumerable<UserModel> GetAll();
         void RegisterUser(UserModel user);
         UserModel Authenticate(UserModel user);
+        bool IsAdminUser(int userID);
     }
 }

@@ -83,6 +83,14 @@ namespace Buisnes
             });
         }
 
+        public bool IsAdminUser(int userID)
+        {
+            var adminUser = this.GetAll().Where(u => u.Id == userID).FirstOrDefault();
+            if (adminUser != null && adminUser.Role == Role.Admin)
+                return true;
+            return false;
+        }
+
         public void RegisterUser(UserModel user)
         {
             ValidateUser(user);

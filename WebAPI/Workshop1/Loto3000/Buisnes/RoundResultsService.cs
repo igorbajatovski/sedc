@@ -165,5 +165,24 @@ namespace Buisnes
                     }
             );
         }
+
+        public IEnumerable<TicketModel> GetWinningTicktesFromLastRound()
+        {
+            int lastRoundId = this.GetAll().Where(r => r.WinningCombination != null).Max(r => r.RoundId);
+            var winTicketsLastRound = this._ticketRepository.GetAll()
+                                          .Where(t => t.Round == lastRoundId && t.Status == Status.Win)
+                                          .Select(
+                                            t => new TicketModel()
+                                              {
+                                                  Id = t.Id,
+                                                  AwardBalance = t.AwardBalance,
+                                                  Combination = t.Combination,
+                                                  Round = t.Round,
+                                                  Status = t.Status,
+                                                  UserId = t.UserId
+                                              }
+                                            );
+            return winTicketsLastRound.ToList();
+        }
     }
 }
