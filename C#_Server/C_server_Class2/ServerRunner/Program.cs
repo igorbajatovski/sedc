@@ -31,7 +31,7 @@ namespace ServerRunner
                 {
                     var readString = Encoding.ASCII.GetString(bytes, 0, readCount);
                     data.Append(readString);
-                    string[] request = readString.Split("\r\n");
+                    string[] request = readString.Split(Environment.NewLine);
                     if (request[request.Length - 2] == "" && request[request.Length - 1] == "")
                         break;
                     readCount = socket.Receive(bytes);
@@ -44,7 +44,7 @@ Server: SEDC server
 
 HODOR";
                 var messageBytes = Encoding.ASCII.GetBytes(message);
-                socket.Send(messageBytes, SocketFlags.None);
+                socket.Send(messageBytes);
                 socket.Close();
                 client.Close();
             }
