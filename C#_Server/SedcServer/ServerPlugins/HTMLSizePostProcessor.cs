@@ -21,7 +21,7 @@ namespace ServerPlugins
             {
                 StringBuilder sb = new StringBuilder(Encoding.UTF8.GetString(response.Bytes));
                 string size = $"{response.Bytes.Length / 1024} Kb";
-                sb.Replace("</body>", $"<div style=\"color: red;\">Size of HTML page is {size}</div></body>");
+                sb.Replace("</body>", $"<div style=\"color: red; position: fixed; bottom: 10px;\">Size of HTML page is {size}</div></body>");
                 response.Bytes = Encoding.UTF8.GetBytes(sb.ToString());
                 return response;
             }
