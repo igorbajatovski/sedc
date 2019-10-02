@@ -28,14 +28,9 @@ namespace ServerCore.Requests
             }
 
             var path = match.Groups[2].Value;
-            var query = match.Groups[3].Value;
+            var query = new QueryParamCollection(match.Groups[3].Value);
             // to-do: map headers, querystring, body, etc...
 
-            // Query string
-            QueryCollection queryCollection = new QueryCollection(query);
-            ///////////////////////////////////////////////////
-
-            // Headers
             var headerLines = lines.Skip(1).TakeWhile(line => !string.IsNullOrEmpty(line));
             var headerDict = new Dictionary<string, string>();
 
@@ -52,7 +47,6 @@ namespace ServerCore.Requests
             }
 
             HeaderCollection headers = new HeaderCollection(headerDict);
-            ///////////////////////////////////////////////////
 
             var bodyLines = lines.SkipWhile(line => !string.IsNullOrEmpty(line)).Skip(1);
             var body = string.Join(Environment.NewLine, bodyLines);
@@ -61,7 +55,7 @@ namespace ServerCore.Requests
             {
                 Method = method,
                 Path = path,
-                Query = queryCollection,
+                Query = query,
                 Headers = headers,
                 Body = body
             };

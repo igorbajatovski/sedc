@@ -6,8 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PngResponseGenerator\PngResponseGeneratorLib.csproj" />
     <ProjectReference Include="..\ServerCore\ServerCore.csproj" />
     <ProjectReference Include="..\ServerInterfaces\ServerInterfaces.csproj" />
+    <ProjectReference Include="..\ServerPlugins\ServerPlugins.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ubava_slika.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

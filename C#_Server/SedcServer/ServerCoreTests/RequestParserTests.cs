@@ -14,13 +14,10 @@ namespace ServerCoreTests
             RequestParser parser = new RequestParser();
             Method expectedMethod = Method.Get;
             string expectedPath = "jen/dva";
-            string expectedQuery = @"param = value
-param = value2
-param1 = value1
-";
+            string expectedQuery = "param=value";
             string expectedBody = string.Empty;
             string expectedFetchMode = "navigate";
-            string requestString = @"GET /jen/dva?param=value&param1=value1&param=value2 HTTP/1.1
+            string requestString = @"GET /jen/dva?param=value HTTP/1.1
 Host: localhost:13000
 Connection: keep-alive
 Cache-Control: max-age=0
@@ -39,7 +36,7 @@ Cookie: _ga=GA1.1.405632844.1539592429; x-access-token=eyJhbGciOiJIUzI1NiIsInR5c
             // 3. Assert
             Assert.AreEqual(expectedMethod, actual.Method);
             Assert.AreEqual(expectedPath, actual.Path);
-            Assert.AreEqual(expectedQuery, actual.Query.ToString());
+            Assert.AreEqual(expectedQuery, actual.Query);
             Assert.AreEqual(expectedBody, actual.Body);
             Assert.AreEqual(expectedFetchMode, actual.Headers.GetHeader("Sec-Fetch-Mode"));
         }
@@ -78,7 +75,7 @@ Connection: keep-alive
             // 3. Assert
             Assert.AreEqual(expectedMethod, actual.Method);
             Assert.AreEqual(expectedPath, actual.Path);
-            Assert.AreEqual(expectedQuery, actual.Query.ToString());
+            Assert.AreEqual(expectedQuery, actual.Query);
             Assert.AreEqual(expectedBody, actual.Body);
             Assert.AreEqual(expectedUserAgent, actual.Headers.GetHeader("User-Agent"));
         }
